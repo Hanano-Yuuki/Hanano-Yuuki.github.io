@@ -1,0 +1,806 @@
+<!DOCTYPE html>
+
+
+
+  
+
+
+<html class="theme-next pisces use-motion" lang="zh-Hans">
+<head>
+  <!-- hexo-inject:begin --><!-- hexo-inject:end --><meta charset="UTF-8"/>
+<meta http-equiv="X-UA-Compatible" content="IE=edge" />
+<meta name="viewport" content="width=device-width, initial-scale=1, maximum-scale=1"/>
+<meta name="theme-color" content="#222">
+
+
+
+
+
+
+
+
+
+<meta http-equiv="Cache-Control" content="no-transform" />
+<meta http-equiv="Cache-Control" content="no-siteapp" />
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+  
+  
+  <link href="/lib/fancybox/source/jquery.fancybox.css?v=2.1.5" rel="stylesheet" type="text/css" />
+
+
+
+
+
+
+
+<link href="/lib/font-awesome/css/font-awesome.min.css?v=4.6.2" rel="stylesheet" type="text/css" />
+
+<link href="/css/main.css?v=5.1.4" rel="stylesheet" type="text/css" />
+
+
+  <link rel="apple-touch-icon" sizes="180x180" href="/images/apple-touch-icon-next.png?v=5.1.4">
+
+
+  <link rel="icon" type="image/png" sizes="32x32" href="/images/favicon-32x32-next.png?v=5.1.4">
+
+
+  <link rel="icon" type="image/png" sizes="16x16" href="/images/favicon-16x16-next.png?v=5.1.4">
+
+
+  <link rel="mask-icon" href="/images/logo.svg?v=5.1.4" color="#222">
+
+
+
+
+
+  <meta name="keywords" content="算法," />
+
+
+
+
+
+
+
+
+
+
+<meta name="description" content="本文介绍树链剖分算法    例题按照惯例 先介绍一道题目HDOJ3966抽象题意：题目给了一颗树，每个节点都有一个权值，给出以下三种操作：    D l r v 表示从l节点到r节点的简单路径上的所有节点同时减少v的权值 I l r v 表示从l节点到r节点的简单路径上的所有节点同时增加v的权值 Q p 查询p节点上的权值朴素做法比较朴素的做法是用一个数组维护每一个节点的权值，更新路径上节点信息">
+<meta name="keywords" content="算法">
+<meta property="og:type" content="article">
+<meta property="og:title" content="树链剖分">
+<meta property="og:url" content="http://yoursite.com/2018/07/21/tree_chain_spilt/index.html">
+<meta property="og:site_name" content="Hanano&#39;s Blog">
+<meta property="og:description" content="本文介绍树链剖分算法    例题按照惯例 先介绍一道题目HDOJ3966抽象题意：题目给了一颗树，每个节点都有一个权值，给出以下三种操作：    D l r v 表示从l节点到r节点的简单路径上的所有节点同时减少v的权值 I l r v 表示从l节点到r节点的简单路径上的所有节点同时增加v的权值 Q p 查询p节点上的权值朴素做法比较朴素的做法是用一个数组维护每一个节点的权值，更新路径上节点信息">
+<meta property="og:locale" content="zh-Hans">
+<meta property="og:updated_time" content="2018-07-21T06:35:16.000Z">
+<meta name="twitter:card" content="summary">
+<meta name="twitter:title" content="树链剖分">
+<meta name="twitter:description" content="本文介绍树链剖分算法    例题按照惯例 先介绍一道题目HDOJ3966抽象题意：题目给了一颗树，每个节点都有一个权值，给出以下三种操作：    D l r v 表示从l节点到r节点的简单路径上的所有节点同时减少v的权值 I l r v 表示从l节点到r节点的简单路径上的所有节点同时增加v的权值 Q p 查询p节点上的权值朴素做法比较朴素的做法是用一个数组维护每一个节点的权值，更新路径上节点信息">
+
+
+
+<script type="text/javascript" id="hexo.configurations">
+  var NexT = window.NexT || {};
+  var CONFIG = {
+    root: '/',
+    scheme: 'Pisces',
+    version: '5.1.4',
+    sidebar: {"position":"right","display":"post","offset":12,"b2t":false,"scrollpercent":false,"onmobile":false},
+    fancybox: true,
+    tabs: true,
+    motion: {"enable":true,"async":false,"transition":{"post_block":"fadeIn","post_header":"slideDownIn","post_body":"slideDownIn","coll_header":"slideLeftIn","sidebar":"slideUpIn"}},
+    duoshuo: {
+      userId: '0',
+      author: '博主'
+    },
+    algolia: {
+      applicationID: '',
+      apiKey: '',
+      indexName: '',
+      hits: {"per_page":10},
+      labels: {"input_placeholder":"Search for Posts","hits_empty":"We didn't find any results for the search: ${query}","hits_stats":"${hits} results found in ${time} ms"}
+    }
+  };
+</script>
+
+
+
+  <link rel="canonical" href="http://yoursite.com/2018/07/21/tree_chain_spilt/"/>
+
+
+
+
+
+  <title>树链剖分 | Hanano's Blog</title><!-- hexo-inject:begin --><!-- hexo-inject:end -->
+  
+
+
+
+
+
+
+
+
+</head>
+
+<body itemscope itemtype="http://schema.org/WebPage" lang="zh-Hans">
+
+  
+  
+    
+  
+
+  <!-- hexo-inject:begin --><!-- hexo-inject:end --><div class="container sidebar-position-right page-post-detail">
+    <div class="headband"></div>
+
+    <header id="header" class="header" itemscope itemtype="http://schema.org/WPHeader">
+      <div class="header-inner"><div class="site-brand-wrapper">
+  <div class="site-meta ">
+    
+
+    <div class="custom-logo-site-title">
+      <a href="/"  class="brand" rel="start">
+        <span class="logo-line-before"><i></i></span>
+        <span class="site-title">Hanano's Blog</span>
+        <span class="logo-line-after"><i></i></span>
+      </a>
+    </div>
+      
+        <p class="site-subtitle"></p>
+      
+  </div>
+
+  <div class="site-nav-toggle">
+    <button>
+      <span class="btn-bar"></span>
+      <span class="btn-bar"></span>
+      <span class="btn-bar"></span>
+    </button>
+  </div>
+</div>
+
+<nav class="site-nav">
+  
+
+  
+    <ul id="menu" class="menu">
+      
+        
+        <li class="menu-item menu-item-home">
+          <a href="/" rel="section">
+            
+              <i class="menu-item-icon fa fa-fw fa-home"></i> <br />
+            
+            首页
+          </a>
+        </li>
+      
+        
+        <li class="menu-item menu-item-tags">
+          <a href="/tags" rel="section">
+            
+              <i class="menu-item-icon fa fa-fw fa-tags"></i> <br />
+            
+            标签
+          </a>
+        </li>
+      
+        
+        <li class="menu-item menu-item-categories">
+          <a href="/categories" rel="section">
+            
+              <i class="menu-item-icon fa fa-fw fa-th"></i> <br />
+            
+            分类
+          </a>
+        </li>
+      
+        
+        <li class="menu-item menu-item-archives">
+          <a href="/archives" rel="section">
+            
+              <i class="menu-item-icon fa fa-fw fa-archive"></i> <br />
+            
+            归档
+          </a>
+        </li>
+      
+
+      
+    </ul>
+  
+
+  
+</nav>
+
+
+
+ </div>
+    </header>
+
+    <main id="main" class="main">
+      <div class="main-inner">
+        <div class="content-wrap">
+          <div id="content" class="content">
+            
+
+  <div id="posts" class="posts-expand">
+    
+
+  
+
+  
+  
+  
+
+  <article class="post post-type-normal" itemscope itemtype="http://schema.org/Article">
+  
+  
+  
+  <div class="post-block">
+    <link itemprop="mainEntityOfPage" href="http://yoursite.com/2018/07/21/tree_chain_spilt/">
+
+    <span hidden itemprop="author" itemscope itemtype="http://schema.org/Person">
+      <meta itemprop="name" content="Hanano_Yuuki">
+      <meta itemprop="description" content="">
+      <meta itemprop="image" content="/images/avatar.gif">
+    </span>
+
+    <span hidden itemprop="publisher" itemscope itemtype="http://schema.org/Organization">
+      <meta itemprop="name" content="Hanano's Blog">
+    </span>
+
+    
+      <header class="post-header">
+
+        
+        
+          <h1 class="post-title" itemprop="name headline">树链剖分</h1>
+        
+
+        <div class="post-meta">
+          <span class="post-time">
+            
+              <span class="post-meta-item-icon">
+                <i class="fa fa-calendar-o"></i>
+              </span>
+              
+                <span class="post-meta-item-text">发表于</span>
+              
+              <time title="创建于" itemprop="dateCreated datePublished" datetime="2018-07-21T14:28:50+08:00">
+                2018-07-21
+              </time>
+            
+
+            
+
+            
+          </span>
+
+          
+            <span class="post-category" >
+            
+              <span class="post-meta-divider">|</span>
+            
+              <span class="post-meta-item-icon">
+                <i class="fa fa-folder-o"></i>
+              </span>
+              
+                <span class="post-meta-item-text">分类于</span>
+              
+              
+                <span itemprop="about" itemscope itemtype="http://schema.org/Thing">
+                  <a href="/categories/tree-chain-spilt/" itemprop="url" rel="index">
+                    <span itemprop="name">tree_chain_spilt</span>
+                  </a>
+                </span>
+
+                
+                
+              
+            </span>
+          
+
+          
+            
+          
+
+          
+          
+
+          
+
+          
+
+          
+
+        </div>
+      </header>
+    
+
+    
+    
+    
+    <div class="post-body" itemprop="articleBody">
+
+      
+      
+
+      
+        <blockquote>
+<p>本文介绍树链剖分算法  </p>
+</blockquote>
+<h3 id="例题"><a href="#例题" class="headerlink" title="例题"></a>例题</h3><p>按照惯例 先介绍一道题目<br><a href="http://acm.hdu.edu.cn/showproblem.php?pid=3966" target="_blank" rel="noopener">HDOJ3966</a><br>抽象题意：题目给了一颗树，每个节点都有一个权值，给出以下三种操作：  </p>
+<ol>
+<li>D l r v 表示从l节点到r节点的简单路径上的所有节点同时减少v的权值</li>
+<li>I l r v 表示从l节点到r节点的简单路径上的所有节点同时增加v的权值</li>
+<li>Q p 查询p节点上的权值<h3 id="朴素做法"><a href="#朴素做法" class="headerlink" title="朴素做法"></a>朴素做法</h3>比较朴素的做法是用一个数组维护每一个节点的权值，更新路径上节点信息的时候从l节点向上更新至l和r节点的lca，从r节点向上更新至l和r节点的lca<br>考虑复杂度，每次更新路径的复杂度最坏是O(n)的，n是节点总个数，如果要更新m次，复杂度就是O(n*m)，这个复杂度是很差的，必然会TLE<br>有什么办法优化呢？  <h3 id="线性数组的延申"><a href="#线性数组的延申" class="headerlink" title="线性数组的延申"></a>线性数组的延申</h3>先考虑线性数组，通常区段更新和单点查询我们会采用树状数组或者线段树的数据结构来进行维护，复杂度可以降低到对数级别<br>那么树上怎么套树状数组（线段树）呢<br>首先我们得将树展开成链<br>通常的办法是树链剖分  <h3 id="树链剖分"><a href="#树链剖分" class="headerlink" title="树链剖分"></a>树链剖分</h3><h4 id="naive的做法"><a href="#naive的做法" class="headerlink" title="naive的做法"></a>naive的做法</h4>把树展开成链是很简单的 一遍dfs就能搞定 在路径分岔口注意申请多条链就行了  <h4 id="最优复杂度的剖分"><a href="#最优复杂度的剖分" class="headerlink" title="最优复杂度的剖分"></a>最优复杂度的剖分</h4>介绍一下轻重边剖分策略<br>为了方便叙述 记sz[i]为以i节点为根的子树节点个数<br>轻边性质：对于轻边u-&gt;v,有sz[v]&lt;=sz[u/2]<br>重边反之<br>那么对于整颗树而言 从树根到叶子节点所经过的轻边/重<strong>路径</strong>不会超过$\log(n)$条<br>证明是显然的，因为构造一颗平衡树的高度总是为$\log(n)$<br>那么 一条边(u-&gt;v)为重边的条件即为对于节点u的所有节点vi都有sz[v]&gt;=sz[vi] (通俗的讲就是子树节点最多的儿子)<h4 id="实现"><a href="#实现" class="headerlink" title="实现"></a>实现</h4>分两步dfs<br>第一步dfs：记录一下所有节点的<strong>深度 父亲 子树大小 子树节点最多的儿子(重儿子)</strong><br>例题代码：  <figure class="highlight c++"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br><span class="line">16</span><br></pre></td><td class="code"><pre><span class="line"><span class="comment">//v-&gt;当前考虑的点 u-&gt;v的父亲节点 dep-&gt;深度</span></span><br><span class="line"><span class="comment">//g-&gt;邻接表</span></span><br><span class="line"><span class="comment">//fa-&gt;父亲数组</span></span><br><span class="line"><span class="function"><span class="keyword">void</span> <span class="title">dfs1</span><span class="params">(<span class="keyword">int</span> v,<span class="keyword">int</span> u,<span class="keyword">int</span> dep)</span></span>&#123;</span><br><span class="line">    depth[v]=dep;</span><br><span class="line">    fa[v]=u;</span><br><span class="line">    sz[v]=<span class="number">1</span>;</span><br><span class="line">    <span class="keyword">for</span>(<span class="keyword">int</span> i=<span class="number">0</span>;i&lt;g[v].size();i++)&#123;</span><br><span class="line">        <span class="keyword">int</span> nxt=g[v][i];</span><br><span class="line">        <span class="keyword">if</span>(nxt==u) <span class="keyword">continue</span>;</span><br><span class="line">        dfs1(nxt,v,dep+<span class="number">1</span>);</span><br><span class="line">        sz[v]+=sz[nxt];</span><br><span class="line">        <span class="comment">//maxchild数组一开始初始化为-1</span></span><br><span class="line">        <span class="keyword">if</span>(maxchild[v]==<span class="number">-1</span>||maxchild[v]&lt;sz[nxt]) maxchild[v]=nxt;</span><br><span class="line">    &#125;</span><br><span class="line">&#125;</span><br></pre></td></tr></table></figure>
+</li>
+</ol>
+<p>第二步dfs：记录一下所有节点的<strong>dfs序</strong> 与此同时 我们要做好树链剖分的工作：</p>
+<ol>
+<li>如果正在考虑的节点v 满足<strong>是树根节点</strong>或者<strong>不是它父亲节点的重儿子</strong> 那么新建一条链 把v当作这条链的链头并做记录</li>
+<li>若不然 把正在考虑的节点v连到它父亲节点所在链的尾部<br>ps：有时候并不需要记录整条链，有时候需要记录其他信息，对于前文的例题来说 我们记录一下每一个节点v所在链的链头top[v]<br>在第二步dfs中 如果需要使用树状数组等维护<strong>连续</strong>数据的数据结构 我们需要保持同一条链的dfs序是连续的 通过第二步dfs的[1]可以知道 只需要在进入儿子节点的栈堆帧之前 先访问重儿子即可(不要重复访问重儿子)<br>例题代码:  <figure class="highlight c++"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br><span class="line">16</span><br><span class="line">17</span><br><span class="line">18</span><br></pre></td><td class="code"><pre><span class="line"><span class="comment">//v-&gt;当前考虑的点 ts-&gt;dfs时间戳，用来记录dfs序</span></span><br><span class="line"><span class="comment">//chaincnt-&gt;链计数器</span></span><br><span class="line"><span class="function"><span class="keyword">void</span> <span class="title">dfs2</span><span class="params">(<span class="keyword">int</span> v)</span></span>&#123;</span><br><span class="line">    dfn[v]=++ts;</span><br><span class="line">    <span class="keyword">if</span>(fa[v]==<span class="number">-1</span>||v!=maxchild[fa[v]])&#123;</span><br><span class="line">        chaincnt++;</span><br><span class="line">        top[v]=v;</span><br><span class="line">    &#125;</span><br><span class="line">    <span class="keyword">else</span>&#123;</span><br><span class="line">        top[v]=top[fa[v]];</span><br><span class="line">    &#125;</span><br><span class="line">    <span class="keyword">if</span>(maxchild[v]==<span class="number">-1</span>) <span class="keyword">return</span>;</span><br><span class="line">    dfs2(maxchild[v]);</span><br><span class="line">    <span class="keyword">for</span>(<span class="keyword">int</span> i=<span class="number">0</span>;i&lt;g[v].size();i++)&#123;</span><br><span class="line">        <span class="keyword">int</span> u=g[v][i];</span><br><span class="line">        <span class="keyword">if</span>(u!=maxchild[v]&amp;&amp;u!=fa[v]) dfs2(u);</span><br><span class="line">    &#125;</span><br><span class="line">&#125;</span><br></pre></td></tr></table></figure>
+</li>
+</ol>
+<p>好了我们剖分完了 此时的dfn数组中保存的是每一个节点的dfs序 如果节点存在相同的链中 那么他们的dfn值是连续的  </p>
+<h3 id="区段更新"><a href="#区段更新" class="headerlink" title="区段更新"></a>区段更新</h3><p>回到题目 对于操作1和2 我们要更新简单路径上的节点权值<br>分两种情况：  </p>
+<ol>
+<li>l r在同一条链上</li>
+<li>l r在不同链上<br>假设我们用树状数组来维护数据<br>对于情况1 那好办 由于同一条链上的dfn值是连续的 那么只要做操作 <code>add(dfn[l],v),add(dfn[r]+1,-v)</code> 即可 注意这里的l得在r的上面(也就是说 更靠近链头)<br>对于操作2 有很多办法转化成操作1 有人喜欢先求lca 其实不用这么麻烦：  <blockquote>
+<p>begin<br>更新<strong>节点所在链链头深度比较大的节点</strong>不妨设l<br>做操作 <code>add(dfn[top[l]],v),add(dfn[l]+1,-v)</code><br>把l跳到fa[top[l]]<br>goto begin  </p>
+</blockquote>
+</li>
+</ol>
+<p>这样就把情况2规约成了许多情况1的叠加(建议画个图更容易理解)<br><strong>最后在注意一下 所有在树状数组上的操作下标需要使用每个节点的dfn值</strong>  </p>
+<h3 id="例题代码"><a href="#例题代码" class="headerlink" title="例题代码"></a>例题代码</h3><figure class="highlight c++"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br><span class="line">16</span><br><span class="line">17</span><br><span class="line">18</span><br><span class="line">19</span><br><span class="line">20</span><br><span class="line">21</span><br><span class="line">22</span><br><span class="line">23</span><br><span class="line">24</span><br><span class="line">25</span><br><span class="line">26</span><br><span class="line">27</span><br><span class="line">28</span><br><span class="line">29</span><br><span class="line">30</span><br><span class="line">31</span><br><span class="line">32</span><br><span class="line">33</span><br><span class="line">34</span><br><span class="line">35</span><br><span class="line">36</span><br><span class="line">37</span><br><span class="line">38</span><br><span class="line">39</span><br><span class="line">40</span><br><span class="line">41</span><br><span class="line">42</span><br><span class="line">43</span><br><span class="line">44</span><br><span class="line">45</span><br><span class="line">46</span><br><span class="line">47</span><br><span class="line">48</span><br><span class="line">49</span><br><span class="line">50</span><br><span class="line">51</span><br><span class="line">52</span><br><span class="line">53</span><br><span class="line">54</span><br><span class="line">55</span><br><span class="line">56</span><br><span class="line">57</span><br><span class="line">58</span><br><span class="line">59</span><br><span class="line">60</span><br><span class="line">61</span><br><span class="line">62</span><br><span class="line">63</span><br><span class="line">64</span><br><span class="line">65</span><br><span class="line">66</span><br><span class="line">67</span><br><span class="line">68</span><br><span class="line">69</span><br><span class="line">70</span><br><span class="line">71</span><br><span class="line">72</span><br><span class="line">73</span><br><span class="line">74</span><br><span class="line">75</span><br><span class="line">76</span><br><span class="line">77</span><br><span class="line">78</span><br><span class="line">79</span><br><span class="line">80</span><br><span class="line">81</span><br><span class="line">82</span><br><span class="line">83</span><br><span class="line">84</span><br><span class="line">85</span><br><span class="line">86</span><br><span class="line">87</span><br><span class="line">88</span><br><span class="line">89</span><br><span class="line">90</span><br><span class="line">91</span><br><span class="line">92</span><br><span class="line">93</span><br><span class="line">94</span><br><span class="line">95</span><br><span class="line">96</span><br><span class="line">97</span><br><span class="line">98</span><br><span class="line">99</span><br><span class="line">100</span><br><span class="line">101</span><br><span class="line">102</span><br><span class="line">103</span><br><span class="line">104</span><br><span class="line">105</span><br><span class="line">106</span><br><span class="line">107</span><br><span class="line">108</span><br><span class="line">109</span><br><span class="line">110</span><br><span class="line">111</span><br><span class="line">112</span><br><span class="line">113</span><br><span class="line">114</span><br><span class="line">115</span><br><span class="line">116</span><br><span class="line">117</span><br><span class="line">118</span><br><span class="line">119</span><br><span class="line">120</span><br><span class="line">121</span><br><span class="line">122</span><br><span class="line">123</span><br><span class="line">124</span><br><span class="line">125</span><br><span class="line">126</span><br><span class="line">127</span><br><span class="line">128</span><br><span class="line">129</span><br><span class="line">130</span><br><span class="line">131</span><br><span class="line">132</span><br><span class="line">133</span><br><span class="line">134</span><br><span class="line">135</span><br></pre></td><td class="code"><pre><span class="line"><span class="meta">#<span class="meta-keyword">include</span><span class="meta-string">&lt;bits/stdc++.h&gt;</span></span></span><br><span class="line"></span><br><span class="line"><span class="keyword">using</span> <span class="keyword">namespace</span> <span class="built_in">std</span>;</span><br><span class="line"><span class="keyword">const</span> <span class="keyword">int</span> N=<span class="number">50000</span>+<span class="number">10</span>;</span><br><span class="line"></span><br><span class="line"><span class="keyword">int</span> n,m,p;</span><br><span class="line"><span class="built_in">vector</span>&lt;<span class="keyword">int</span>&gt; g[N];</span><br><span class="line"><span class="keyword">int</span> maxchild[N],dfn[N],sz[N];</span><br><span class="line"><span class="keyword">int</span> fa[N];</span><br><span class="line"><span class="keyword">int</span> depth[N];</span><br><span class="line"><span class="keyword">int</span> top[N];</span><br><span class="line"><span class="keyword">int</span> val[N];</span><br><span class="line"><span class="keyword">int</span> chaincnt,ts;</span><br><span class="line"><span class="keyword">int</span> c[N];</span><br><span class="line"></span><br><span class="line"><span class="comment">//--------树状数组代码---------</span></span><br><span class="line"><span class="function"><span class="keyword">inline</span> <span class="keyword">int</span> <span class="title">lowbit</span><span class="params">(<span class="keyword">int</span> x)</span></span>&#123;</span><br><span class="line">    <span class="keyword">return</span> x&amp;(-x);</span><br><span class="line">&#125;</span><br><span class="line"></span><br><span class="line"><span class="function"><span class="keyword">inline</span> <span class="keyword">void</span> <span class="title">add</span><span class="params">(<span class="keyword">int</span> pos,<span class="keyword">int</span> v)</span></span>&#123;</span><br><span class="line">    <span class="keyword">for</span>(;pos&lt;=n;pos+=lowbit(pos))&#123;</span><br><span class="line">        c[pos]+=v;</span><br><span class="line">    &#125;</span><br><span class="line">&#125;</span><br><span class="line"></span><br><span class="line"><span class="function"><span class="keyword">inline</span> <span class="keyword">int</span> <span class="title">ask</span><span class="params">(<span class="keyword">int</span> pos)</span></span>&#123;</span><br><span class="line">    <span class="keyword">int</span> ret=<span class="number">0</span>;</span><br><span class="line">    <span class="keyword">for</span>(;pos&gt;<span class="number">0</span>;pos-=lowbit(pos)) ret+=c[pos];</span><br><span class="line">    <span class="keyword">return</span> ret;</span><br><span class="line">&#125;</span><br><span class="line"><span class="comment">//----------------------------</span></span><br><span class="line"></span><br><span class="line"><span class="comment">//初始化</span></span><br><span class="line"><span class="function"><span class="keyword">void</span> <span class="title">init</span><span class="params">()</span></span>&#123;</span><br><span class="line">    <span class="keyword">for</span>(<span class="keyword">int</span> i=<span class="number">1</span>;i&lt;=n;i++)&#123;</span><br><span class="line">        g[i].clear();</span><br><span class="line">    &#125;</span><br><span class="line">    <span class="built_in">memset</span>(maxchild,<span class="number">-1</span>,<span class="keyword">sizeof</span>(maxchild));</span><br><span class="line">    <span class="built_in">memset</span>(sz,<span class="number">0</span>,<span class="keyword">sizeof</span>(sz));</span><br><span class="line">    <span class="built_in">memset</span>(top,<span class="number">-1</span>,<span class="keyword">sizeof</span>(top));</span><br><span class="line">    <span class="built_in">memset</span>(fa,<span class="number">-1</span>,<span class="keyword">sizeof</span>(fa));</span><br><span class="line">    <span class="built_in">memset</span>(c,<span class="number">0</span>,<span class="keyword">sizeof</span>(c));</span><br><span class="line">    chaincnt=ts=<span class="number">0</span>;</span><br><span class="line">&#125;</span><br><span class="line"></span><br><span class="line"><span class="comment">//第一次dfs</span></span><br><span class="line"><span class="function"><span class="keyword">void</span> <span class="title">dfs1</span><span class="params">(<span class="keyword">int</span> v,<span class="keyword">int</span> u,<span class="keyword">int</span> dep)</span></span>&#123;</span><br><span class="line">    depth[v]=dep;</span><br><span class="line">    fa[v]=u;</span><br><span class="line">    sz[v]=<span class="number">1</span>;</span><br><span class="line">    <span class="keyword">for</span>(<span class="keyword">int</span> i=<span class="number">0</span>;i&lt;g[v].size();i++)&#123;</span><br><span class="line">        <span class="keyword">int</span> nxt=g[v][i];</span><br><span class="line">        <span class="keyword">if</span>(nxt==u) <span class="keyword">continue</span>;</span><br><span class="line">        dfs1(nxt,v,dep+<span class="number">1</span>);</span><br><span class="line">        sz[v]+=sz[nxt];</span><br><span class="line">        <span class="keyword">if</span>(maxchild[v]==<span class="number">-1</span>||maxchild[v]&lt;sz[nxt]) maxchild[v]=nxt;</span><br><span class="line">    &#125;</span><br><span class="line">&#125;</span><br><span class="line"></span><br><span class="line"><span class="comment">//第二次dfs</span></span><br><span class="line"><span class="function"><span class="keyword">void</span> <span class="title">dfs2</span><span class="params">(<span class="keyword">int</span> v)</span></span>&#123;</span><br><span class="line">    dfn[v]=++ts;</span><br><span class="line">    <span class="keyword">if</span>(fa[v]==<span class="number">-1</span>||v!=maxchild[fa[v]])&#123;</span><br><span class="line">        chaincnt++;</span><br><span class="line">        top[v]=v;</span><br><span class="line">    &#125;</span><br><span class="line">    <span class="keyword">else</span>&#123;</span><br><span class="line">        top[v]=top[fa[v]];</span><br><span class="line">    &#125;</span><br><span class="line">    <span class="keyword">if</span>(maxchild[v]==<span class="number">-1</span>) <span class="keyword">return</span>;</span><br><span class="line">    dfs2(maxchild[v]);</span><br><span class="line">    <span class="keyword">for</span>(<span class="keyword">int</span> i=<span class="number">0</span>;i&lt;g[v].size();i++)&#123;</span><br><span class="line">        <span class="keyword">int</span> u=g[v][i];</span><br><span class="line">        <span class="keyword">if</span>(u!=maxchild[v]&amp;&amp;u!=fa[v]) dfs2(u);</span><br><span class="line">    &#125;</span><br><span class="line">&#125;</span><br><span class="line"></span><br><span class="line"><span class="function"><span class="keyword">int</span> <span class="title">main</span><span class="params">()</span></span>&#123;</span><br><span class="line">    <span class="meta">#<span class="meta-keyword">ifndef</span> ONLINE_JUDGE</span></span><br><span class="line">    freopen(<span class="string">"input.in"</span>,<span class="string">"r"</span>,<span class="built_in">stdin</span>);</span><br><span class="line">    freopen(<span class="string">"output.o"</span>,<span class="string">"w+"</span>,<span class="built_in">stdout</span>);</span><br><span class="line">    <span class="meta">#<span class="meta-keyword">endif</span></span></span><br><span class="line">    <span class="keyword">while</span>(~<span class="built_in">scanf</span>(<span class="string">"%d %d %d"</span>,&amp;n,&amp;m,&amp;p))&#123;</span><br><span class="line">        init();</span><br><span class="line">        <span class="keyword">for</span>(<span class="keyword">int</span> i=<span class="number">1</span>;i&lt;=n;i++) <span class="built_in">scanf</span>(<span class="string">"%d"</span>,val+i);</span><br><span class="line">        <span class="keyword">for</span>(<span class="keyword">int</span> i=<span class="number">1</span>;i&lt;=m;i++)&#123;</span><br><span class="line">            <span class="keyword">int</span> from,to;</span><br><span class="line">            <span class="built_in">scanf</span>(<span class="string">"%d %d"</span>,&amp;from,&amp;to);</span><br><span class="line">            g[from].push_back(to);</span><br><span class="line">            g[to].push_back(from);</span><br><span class="line">        &#125;</span><br><span class="line">        dfs1(<span class="number">1</span>,<span class="number">-1</span>,<span class="number">1</span>);</span><br><span class="line">        dfs2(<span class="number">1</span>);</span><br><span class="line">        <span class="keyword">for</span>(<span class="keyword">int</span> i=<span class="number">1</span>;i&lt;=n;i++)&#123;</span><br><span class="line">            add(dfn[i],val[i]);</span><br><span class="line">            add(dfn[i]+<span class="number">1</span>,-val[i]);</span><br><span class="line">        &#125;</span><br><span class="line">        <span class="keyword">while</span>(p--)&#123;</span><br><span class="line">            <span class="keyword">char</span> op;</span><br><span class="line">            <span class="built_in">cin</span>&gt;&gt;op;</span><br><span class="line">            <span class="comment">//数据量挺大 为什么用cin呢...因为...</span></span><br><span class="line">            <span class="comment">//后台数据有点问题 getchar处理不好回车</span></span><br><span class="line">            <span class="comment">//这也是许多人RE/TLE的主要原因</span></span><br><span class="line">            <span class="keyword">if</span>(op==<span class="string">'Q'</span>)&#123;</span><br><span class="line">                <span class="keyword">int</span> poss;</span><br><span class="line">                <span class="built_in">scanf</span>(<span class="string">"%d"</span>,&amp;poss);</span><br><span class="line">                poss=dfn[poss];</span><br><span class="line">                <span class="built_in">printf</span>(<span class="string">"%d\n"</span>,ask(poss));</span><br><span class="line">            &#125;</span><br><span class="line">            <span class="keyword">else</span>&#123;</span><br><span class="line">                <span class="comment">//区段更新</span></span><br><span class="line">                <span class="keyword">int</span> l,r,inc;</span><br><span class="line">                <span class="built_in">scanf</span>(<span class="string">"%d %d %d"</span>,&amp;l,&amp;r,&amp;inc);</span><br><span class="line">                <span class="keyword">if</span>(op==<span class="string">'D'</span>) inc=-inc;</span><br><span class="line">                <span class="keyword">int</span> f1=top[l];</span><br><span class="line">                <span class="keyword">int</span> f2=top[r];</span><br><span class="line">                <span class="keyword">while</span>(f1!=f2)&#123;</span><br><span class="line">                    <span class="keyword">if</span>(depth[f1]&lt;depth[f2])&#123;</span><br><span class="line">                        swap(f1,f2);</span><br><span class="line">                        swap(l,r);</span><br><span class="line">                    &#125;</span><br><span class="line">                    add(dfn[f1],inc);</span><br><span class="line">                    add(dfn[l]+<span class="number">1</span>,-inc);</span><br><span class="line">                    l=fa[f1];</span><br><span class="line">                    f1=top[l];</span><br><span class="line">                &#125;</span><br><span class="line">                <span class="keyword">if</span>(depth[l]&gt;depth[r]) swap(l,r);</span><br><span class="line">                add(dfn[l],inc);</span><br><span class="line">                add(dfn[r]+<span class="number">1</span>,-inc);</span><br><span class="line">            &#125;</span><br><span class="line">        &#125;</span><br><span class="line">    &#125;</span><br><span class="line">    <span class="keyword">return</span> <span class="number">0</span>;</span><br><span class="line">&#125;</span><br></pre></td></tr></table></figure>
+      
+    </div>
+    
+    
+    
+
+    
+
+    
+
+    
+
+    <footer class="post-footer">
+      
+        <div class="post-tags">
+          
+            <a href="/tags/算法/" rel="tag"># 算法</a>
+          
+        </div>
+      
+
+      
+      
+      
+
+      
+        <div class="post-nav">
+          <div class="post-nav-next post-nav-item">
+            
+              <a href="/2018/05/06/Mo's-algorithm/" rel="next" title="莫队算法">
+                <i class="fa fa-chevron-left"></i> 莫队算法
+              </a>
+            
+          </div>
+
+          <span class="post-nav-divider"></span>
+
+          <div class="post-nav-prev post-nav-item">
+            
+          </div>
+        </div>
+      
+
+      
+      
+    </footer>
+  </div>
+  
+  
+  
+  </article>
+
+
+
+    <div class="post-spread">
+      
+    </div>
+  </div>
+
+
+          </div>
+          
+
+
+          
+
+  
+
+
+
+        </div>
+        
+          
+  
+  <div class="sidebar-toggle">
+    <div class="sidebar-toggle-line-wrap">
+      <span class="sidebar-toggle-line sidebar-toggle-line-first"></span>
+      <span class="sidebar-toggle-line sidebar-toggle-line-middle"></span>
+      <span class="sidebar-toggle-line sidebar-toggle-line-last"></span>
+    </div>
+  </div>
+
+  <aside id="sidebar" class="sidebar">
+    
+    <div class="sidebar-inner">
+
+      
+
+      
+        <ul class="sidebar-nav motion-element">
+          <li class="sidebar-nav-toc sidebar-nav-active" data-target="post-toc-wrap">
+            文章目录
+          </li>
+          <li class="sidebar-nav-overview" data-target="site-overview-wrap">
+            站点概览
+          </li>
+        </ul>
+      
+
+      <section class="site-overview-wrap sidebar-panel">
+        <div class="site-overview">
+          <div class="site-author motion-element" itemprop="author" itemscope itemtype="http://schema.org/Person">
+            
+              <p class="site-author-name" itemprop="name">Hanano_Yuuki</p>
+              <p class="site-description motion-element" itemprop="description"></p>
+          </div>
+
+          <nav class="site-state motion-element">
+
+            
+              <div class="site-state-item site-state-posts">
+              
+                <a href="/archives">
+              
+                  <span class="site-state-item-count">10</span>
+                  <span class="site-state-item-name">日志</span>
+                </a>
+              </div>
+            
+
+            
+              
+              
+              <div class="site-state-item site-state-categories">
+                <a href="/categories/index.html">
+                  <span class="site-state-item-count">5</span>
+                  <span class="site-state-item-name">分类</span>
+                </a>
+              </div>
+            
+
+            
+              
+              
+              <div class="site-state-item site-state-tags">
+                <a href="/tags/index.html">
+                  <span class="site-state-item-count">8</span>
+                  <span class="site-state-item-name">标签</span>
+                </a>
+              </div>
+            
+
+          </nav>
+
+          
+
+          
+
+          
+          
+
+          
+          
+
+          
+
+        </div>
+      </section>
+
+      
+      <!--noindex-->
+        <section class="post-toc-wrap motion-element sidebar-panel sidebar-panel-active">
+          <div class="post-toc">
+
+            
+              
+            
+
+            
+              <div class="post-toc-content"><ol class="nav"><li class="nav-item nav-level-3"><a class="nav-link" href="#例题"><span class="nav-number">1.</span> <span class="nav-text">例题</span></a></li><li class="nav-item nav-level-3"><a class="nav-link" href="#朴素做法"><span class="nav-number">2.</span> <span class="nav-text">朴素做法</span></a></li><li class="nav-item nav-level-3"><a class="nav-link" href="#线性数组的延申"><span class="nav-number">3.</span> <span class="nav-text">线性数组的延申</span></a></li><li class="nav-item nav-level-3"><a class="nav-link" href="#树链剖分"><span class="nav-number">4.</span> <span class="nav-text">树链剖分</span></a><ol class="nav-child"><li class="nav-item nav-level-4"><a class="nav-link" href="#naive的做法"><span class="nav-number">4.1.</span> <span class="nav-text">naive的做法</span></a></li><li class="nav-item nav-level-4"><a class="nav-link" href="#最优复杂度的剖分"><span class="nav-number">4.2.</span> <span class="nav-text">最优复杂度的剖分</span></a></li><li class="nav-item nav-level-4"><a class="nav-link" href="#实现"><span class="nav-number">4.3.</span> <span class="nav-text">实现</span></a></li></ol></li><li class="nav-item nav-level-3"><a class="nav-link" href="#区段更新"><span class="nav-number">5.</span> <span class="nav-text">区段更新</span></a></li><li class="nav-item nav-level-3"><a class="nav-link" href="#例题代码"><span class="nav-number">6.</span> <span class="nav-text">例题代码</span></a></li></ol></div>
+            
+
+          </div>
+        </section>
+      <!--/noindex-->
+      
+
+      
+
+    </div>
+  </aside>
+
+
+        
+      </div>
+    </main>
+
+    <footer id="footer" class="footer">
+      <div class="footer-inner">
+        <div class="copyright">&copy; <span itemprop="copyrightYear">2018</span>
+  <span class="with-love">
+    <i class="fa fa-user"></i>
+  </span>
+  <span class="author" itemprop="copyrightHolder">Hanano_Yuuki</span>
+
+  
+</div>
+
+
+  <div class="powered-by">由 <a class="theme-link" target="_blank" href="https://hexo.io">Hexo</a> 强力驱动</div>
+
+
+
+  <span class="post-meta-divider">|</span>
+
+
+
+  <div class="theme-info">主题 &mdash; <a class="theme-link" target="_blank" href="https://github.com/iissnan/hexo-theme-next">NexT.Pisces</a> v5.1.4</div>
+
+
+
+
+        
+
+
+
+
+
+
+
+        
+      </div>
+    </footer>
+
+    
+      <div class="back-to-top">
+        <i class="fa fa-arrow-up"></i>
+        
+      </div>
+    
+
+    
+
+  </div>
+
+  
+
+<script type="text/javascript">
+  if (Object.prototype.toString.call(window.Promise) !== '[object Function]') {
+    window.Promise = null;
+  }
+</script>
+
+
+
+
+
+
+
+
+
+  
+
+
+  
+
+
+
+
+
+
+
+
+
+
+
+  
+  
+    <script type="text/javascript" src="/lib/jquery/index.js?v=2.1.3"></script>
+  
+
+  
+  
+    <script type="text/javascript" src="/lib/fastclick/lib/fastclick.min.js?v=1.0.6"></script>
+  
+
+  
+  
+    <script type="text/javascript" src="/lib/jquery_lazyload/jquery.lazyload.js?v=1.9.7"></script>
+  
+
+  
+  
+    <script type="text/javascript" src="/lib/velocity/velocity.min.js?v=1.2.1"></script>
+  
+
+  
+  
+    <script type="text/javascript" src="/lib/velocity/velocity.ui.min.js?v=1.2.1"></script>
+  
+
+  
+  
+    <script type="text/javascript" src="/lib/fancybox/source/jquery.fancybox.pack.js?v=2.1.5"></script>
+  
+
+  
+  
+    <script type="text/javascript" src="/lib/canvas-nest/canvas-nest.min.js"></script>
+  
+
+
+  
+
+
+  <script type="text/javascript" src="/js/src/utils.js?v=5.1.4"></script>
+
+  <script type="text/javascript" src="/js/src/motion.js?v=5.1.4"></script>
+
+
+
+  
+  
+
+
+  <script type="text/javascript" src="/js/src/affix.js?v=5.1.4"></script>
+
+  <script type="text/javascript" src="/js/src/schemes/pisces.js?v=5.1.4"></script>
+
+
+
+  
+  <script type="text/javascript" src="/js/src/scrollspy.js?v=5.1.4"></script>
+<script type="text/javascript" src="/js/src/post-details.js?v=5.1.4"></script>
+
+
+
+  
+
+
+  <script type="text/javascript" src="/js/src/bootstrap.js?v=5.1.4"></script>
+
+
+
+  
+
+
+  
+
+
+
+
+	
+
+
+
+
+
+  
+
+
+
+
+
+  
+
+
+
+
+
+
+
+
+
+
+
+
+  
+
+
+
+
+
+  
+
+  
+
+  
+
+  
+  
+
+  
+  
+    <script type="text/x-mathjax-config">
+      MathJax.Hub.Config({
+        tex2jax: {
+          inlineMath: [ ['$','$'], ["\\(","\\)"]  ],
+          processEscapes: true,
+          skipTags: ['script', 'noscript', 'style', 'textarea', 'pre', 'code']
+        }
+      });
+    </script>
+
+    <script type="text/x-mathjax-config">
+      MathJax.Hub.Queue(function() {
+        var all = MathJax.Hub.getAllJax(), i;
+        for (i=0; i < all.length; i += 1) {
+          all[i].SourceElement().parentNode.className += ' has-jax';
+        }
+      });
+    </script>
+    <script type="text/javascript" src="//cdnjs.cloudflare.com/ajax/libs/mathjax/2.7.1/MathJax.js?config=TeX-AMS-MML_HTMLorMML"></script>
+  
+
+
+  
+
+  
+
+  
+
+<script type="text/javascript"
+color="255,128,255" opacity='0.7' zIndex="-2" count="99" src="//cdn.bootcss.com/canvas-nest.js/1.0.0/canvas-nest.min.js"></script><!-- hexo-inject:begin --><!-- Begin: Injected MathJax -->
+<script type="text/x-mathjax-config">
+  MathJax.Hub.Config({"tex2jax":{"inlineMath":[["$","$"],["\\(","\\)"]],"skipTags":["script","noscript","style","textarea","pre","code"],"processEscapes":true},"TeX":{"equationNumbers":{"autoNumber":"AMS"}}});
+</script>
+
+<script type="text/x-mathjax-config">
+  MathJax.Hub.Queue(function() {
+    var all = MathJax.Hub.getAllJax(), i;
+    for(i=0; i < all.length; i += 1) {
+      all[i].SourceElement().parentNode.className += ' has-jax';
+    }
+  });
+</script>
+
+<script type="text/javascript" src="https://cdnjs.cloudflare.com/ajax/libs/mathjax/2.7.1/MathJax.js">
+</script>
+<!-- End: Injected MathJax -->
+<!-- hexo-inject:end -->
+
+  
+</body>
+</html>

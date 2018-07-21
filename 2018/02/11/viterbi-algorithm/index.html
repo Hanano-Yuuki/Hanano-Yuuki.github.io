@@ -1,0 +1,933 @@
+<!DOCTYPE html>
+
+
+
+  
+
+
+<html class="theme-next pisces use-motion" lang="zh-Hans">
+<head>
+  <!-- hexo-inject:begin --><!-- hexo-inject:end --><meta charset="UTF-8"/>
+<meta http-equiv="X-UA-Compatible" content="IE=edge" />
+<meta name="viewport" content="width=device-width, initial-scale=1, maximum-scale=1"/>
+<meta name="theme-color" content="#222">
+
+
+
+
+
+
+
+
+
+<meta http-equiv="Cache-Control" content="no-transform" />
+<meta http-equiv="Cache-Control" content="no-siteapp" />
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+  
+  
+  <link href="/lib/fancybox/source/jquery.fancybox.css?v=2.1.5" rel="stylesheet" type="text/css" />
+
+
+
+
+
+
+
+<link href="/lib/font-awesome/css/font-awesome.min.css?v=4.6.2" rel="stylesheet" type="text/css" />
+
+<link href="/css/main.css?v=5.1.4" rel="stylesheet" type="text/css" />
+
+
+  <link rel="apple-touch-icon" sizes="180x180" href="/images/apple-touch-icon-next.png?v=5.1.4">
+
+
+  <link rel="icon" type="image/png" sizes="32x32" href="/images/favicon-32x32-next.png?v=5.1.4">
+
+
+  <link rel="icon" type="image/png" sizes="16x16" href="/images/favicon-16x16-next.png?v=5.1.4">
+
+
+  <link rel="mask-icon" href="/images/logo.svg?v=5.1.4" color="#222">
+
+
+
+
+
+  <meta name="keywords" content="viterbi," />
+
+
+
+
+
+
+
+
+
+
+<meta name="description" content="本章介绍viterbi算法    markov chain大坑,在讲viterbi算法之前,先来讲讲markov chain    markov chain(马尔科夫链)定义：为状态空间中经过从一个状态到另一个状态的转换的随机过程性质：下一状态的概率分布只能由当前状态决定，在时间序列中它前面的事件均与之无关（无记忆性）    上图的红色部分表示了一条（隐）马尔科夫链H1,H2,H3,H4表示状态">
+<meta name="keywords" content="viterbi">
+<meta property="og:type" content="article">
+<meta property="og:title" content="viterbi算法">
+<meta property="og:url" content="http://yoursite.com/2018/02/11/viterbi-algorithm/index.html">
+<meta property="og:site_name" content="Hanano&#39;s Blog">
+<meta property="og:description" content="本章介绍viterbi算法    markov chain大坑,在讲viterbi算法之前,先来讲讲markov chain    markov chain(马尔科夫链)定义：为状态空间中经过从一个状态到另一个状态的转换的随机过程性质：下一状态的概率分布只能由当前状态决定，在时间序列中它前面的事件均与之无关（无记忆性）    上图的红色部分表示了一条（隐）马尔科夫链H1,H2,H3,H4表示状态">
+<meta property="og:locale" content="zh-Hans">
+<meta property="og:image" content="http://yoursite.com/images/18213pic1.png">
+<meta property="og:image" content="http://yoursite.com/images/18211pic1.png">
+<meta property="og:image" content="http://yoursite.com/images/18211pic2.png">
+<meta property="og:updated_time" content="2018-02-13T05:40:48.000Z">
+<meta name="twitter:card" content="summary">
+<meta name="twitter:title" content="viterbi算法">
+<meta name="twitter:description" content="本章介绍viterbi算法    markov chain大坑,在讲viterbi算法之前,先来讲讲markov chain    markov chain(马尔科夫链)定义：为状态空间中经过从一个状态到另一个状态的转换的随机过程性质：下一状态的概率分布只能由当前状态决定，在时间序列中它前面的事件均与之无关（无记忆性）    上图的红色部分表示了一条（隐）马尔科夫链H1,H2,H3,H4表示状态">
+<meta name="twitter:image" content="http://yoursite.com/images/18213pic1.png">
+
+
+
+<script type="text/javascript" id="hexo.configurations">
+  var NexT = window.NexT || {};
+  var CONFIG = {
+    root: '/',
+    scheme: 'Pisces',
+    version: '5.1.4',
+    sidebar: {"position":"right","display":"post","offset":12,"b2t":false,"scrollpercent":false,"onmobile":false},
+    fancybox: true,
+    tabs: true,
+    motion: {"enable":true,"async":false,"transition":{"post_block":"fadeIn","post_header":"slideDownIn","post_body":"slideDownIn","coll_header":"slideLeftIn","sidebar":"slideUpIn"}},
+    duoshuo: {
+      userId: '0',
+      author: '博主'
+    },
+    algolia: {
+      applicationID: '',
+      apiKey: '',
+      indexName: '',
+      hits: {"per_page":10},
+      labels: {"input_placeholder":"Search for Posts","hits_empty":"We didn't find any results for the search: ${query}","hits_stats":"${hits} results found in ${time} ms"}
+    }
+  };
+</script>
+
+
+
+  <link rel="canonical" href="http://yoursite.com/2018/02/11/viterbi-algorithm/"/>
+
+
+
+
+
+  <title>viterbi算法 | Hanano's Blog</title><!-- hexo-inject:begin --><!-- hexo-inject:end -->
+  
+
+
+
+
+
+
+
+
+</head>
+
+<body itemscope itemtype="http://schema.org/WebPage" lang="zh-Hans">
+
+  
+  
+    
+  
+
+  <!-- hexo-inject:begin --><!-- hexo-inject:end --><div class="container sidebar-position-right page-post-detail">
+    <div class="headband"></div>
+
+    <header id="header" class="header" itemscope itemtype="http://schema.org/WPHeader">
+      <div class="header-inner"><div class="site-brand-wrapper">
+  <div class="site-meta ">
+    
+
+    <div class="custom-logo-site-title">
+      <a href="/"  class="brand" rel="start">
+        <span class="logo-line-before"><i></i></span>
+        <span class="site-title">Hanano's Blog</span>
+        <span class="logo-line-after"><i></i></span>
+      </a>
+    </div>
+      
+        <p class="site-subtitle"></p>
+      
+  </div>
+
+  <div class="site-nav-toggle">
+    <button>
+      <span class="btn-bar"></span>
+      <span class="btn-bar"></span>
+      <span class="btn-bar"></span>
+    </button>
+  </div>
+</div>
+
+<nav class="site-nav">
+  
+
+  
+    <ul id="menu" class="menu">
+      
+        
+        <li class="menu-item menu-item-home">
+          <a href="/" rel="section">
+            
+              <i class="menu-item-icon fa fa-fw fa-home"></i> <br />
+            
+            首页
+          </a>
+        </li>
+      
+        
+        <li class="menu-item menu-item-tags">
+          <a href="/tags" rel="section">
+            
+              <i class="menu-item-icon fa fa-fw fa-tags"></i> <br />
+            
+            标签
+          </a>
+        </li>
+      
+        
+        <li class="menu-item menu-item-categories">
+          <a href="/categories" rel="section">
+            
+              <i class="menu-item-icon fa fa-fw fa-th"></i> <br />
+            
+            分类
+          </a>
+        </li>
+      
+        
+        <li class="menu-item menu-item-archives">
+          <a href="/archives" rel="section">
+            
+              <i class="menu-item-icon fa fa-fw fa-archive"></i> <br />
+            
+            归档
+          </a>
+        </li>
+      
+
+      
+    </ul>
+  
+
+  
+</nav>
+
+
+
+ </div>
+    </header>
+
+    <main id="main" class="main">
+      <div class="main-inner">
+        <div class="content-wrap">
+          <div id="content" class="content">
+            
+
+  <div id="posts" class="posts-expand">
+    
+
+  
+
+  
+  
+  
+
+  <article class="post post-type-normal" itemscope itemtype="http://schema.org/Article">
+  
+  
+  
+  <div class="post-block">
+    <link itemprop="mainEntityOfPage" href="http://yoursite.com/2018/02/11/viterbi-algorithm/">
+
+    <span hidden itemprop="author" itemscope itemtype="http://schema.org/Person">
+      <meta itemprop="name" content="Hanano_Yuuki">
+      <meta itemprop="description" content="">
+      <meta itemprop="image" content="/images/avatar.gif">
+    </span>
+
+    <span hidden itemprop="publisher" itemscope itemtype="http://schema.org/Organization">
+      <meta itemprop="name" content="Hanano's Blog">
+    </span>
+
+    
+      <header class="post-header">
+
+        
+        
+          <h1 class="post-title" itemprop="name headline">viterbi算法</h1>
+        
+
+        <div class="post-meta">
+          <span class="post-time">
+            
+              <span class="post-meta-item-icon">
+                <i class="fa fa-calendar-o"></i>
+              </span>
+              
+                <span class="post-meta-item-text">发表于</span>
+              
+              <time title="创建于" itemprop="dateCreated datePublished" datetime="2018-02-11T13:32:44+08:00">
+                2018-02-11
+              </time>
+            
+
+            
+
+            
+          </span>
+
+          
+            <span class="post-category" >
+            
+              <span class="post-meta-divider">|</span>
+            
+              <span class="post-meta-item-icon">
+                <i class="fa fa-folder-o"></i>
+              </span>
+              
+                <span class="post-meta-item-text">分类于</span>
+              
+              
+                <span itemprop="about" itemscope itemtype="http://schema.org/Thing">
+                  <a href="/categories/算法/" itemprop="url" rel="index">
+                    <span itemprop="name">算法</span>
+                  </a>
+                </span>
+
+                
+                
+              
+            </span>
+          
+
+          
+            
+          
+
+          
+          
+
+          
+
+          
+
+          
+
+        </div>
+      </header>
+    
+
+    
+    
+    
+    <div class="post-body" itemprop="articleBody">
+
+      
+      
+
+      
+        <blockquote>
+<p>本章介绍viterbi算法  </p>
+</blockquote>
+<h1 id="markov-chain"><a href="#markov-chain" class="headerlink" title="markov chain"></a>markov chain</h1><p>大坑,在讲viterbi算法之前,先来讲讲markov chain  </p>
+<blockquote>
+<p>markov chain(马尔科夫链)<br>定义：<br>为状态空间中经过从一个状态到另一个状态的转换的随机过程<br>性质：<br>下一状态的概率分布只能由当前状态决定，在时间序列中它前面的事件均与之无关（无记忆性）  </p>
+</blockquote>
+<p><img src="/images/18213pic1.png" alt="pic3"><br>上图的红色部分表示了一条（隐）马尔科夫链<br>H1,H2,H3,H4表示状态<br>P1,P2,P3表示一个状态到另一个状态的转换概率  </p>
+<p>举个例子 例子是这样的<br><a href="http://acm.hdu.edu.cn/showproblem.php?pid=4865" target="_blank" rel="noopener">HDOJ 4865</a></p>
+<p>题目给出了一个状态机 见图<br><img src="/images/18211pic1.png" alt="pic1"><br>还有一个<br><img src="/images/18211pic2.png" alt="pic2"><br>(线太多了 就不写概率了)<br>图1表示 从前一天到后一天的天气转移概率<br>图2表示 当天的天气的叶片状态表示概率<br>题目也给出了第一天的天气初始概率  </p>
+<blockquote>
+<p>p[0][sunny]=0.63,p[0][cloudy]=0.17,p[0][rainy]=0.2 </p>
+</blockquote>
+<p>和每一天的叶子湿度情况(输入数据)  </p>
+<blockquote>
+<p>input[i] (i=0,1,2,…,N-1)</p>
+</blockquote>
+<h1 id="Hidden-Markov-Model"><a href="#Hidden-Markov-Model" class="headerlink" title="Hidden Markov Model"></a>Hidden Markov Model</h1><p>这是一个简单的隐式马尔科夫模型(HMM)<br>我们要解决的问题是<br>第N天最有可能是什么天气 并回溯输出1~N天的天气<br>这是HMM的三个经典问题之一  </p>
+<blockquote>
+<ol>
+<li>第K天天气是weather[i]的概率是多少?  </li>
+<li>第K天最有可能是什么天气?  </li>
+<li>只给出K天里的叶子湿度情况 其他什么都不知道 从而建立一个晴雨转换表,和叶片湿度概率表(也就是上面的图1图2)(这个是最复杂的)</li>
+</ol>
+</blockquote>
+<p>三个问题对应的算法分别是  </p>
+<blockquote>
+<ol>
+<li>forward/backward algorithm  </li>
+<li>viterbi algorithm  </li>
+<li>Baum-Welch algorithm  </li>
+</ol>
+</blockquote>
+<p>本篇只讲viterbi,还有两个坑以后再填<br>也就是例子所要解决的问题之二  </p>
+<h1 id="viterbi-algorithm"><a href="#viterbi-algorithm" class="headerlink" title="viterbi algorithm"></a>viterbi algorithm</h1><h2 id="数学工具支撑"><a href="#数学工具支撑" class="headerlink" title="数学工具支撑"></a>数学工具支撑</h2><p>显然 我们需要一个数学模型来描述这些个状态机<br><strong>矩阵</strong><br>$$<br>A=<br>\left[<br>\begin{matrix}<br>    0.5 &amp; 0.375 &amp; 0.125\\<br>    0.25 &amp; 0.125 &amp; 0.625\\<br>    0.25 &amp; 0.375 &amp; 0.375<br>    \end{matrix}<br>    \right]<br>$$<br>表示天气转移矩阵(transition probability matrix)<br>A[i][j]表示从i天气转移到j天气的概率<br>$$<br>B=<br>\left[<br>\begin{matrix}<br>    0.6 &amp; 0.2 &amp; 0.15 &amp; 0.05\\<br>    0.25 &amp; 0.3 &amp; 0.2 &amp; 0.25\\<br>    0.05 &amp; 0.10 &amp; 0.35 &amp; 0.50<br>    \end{matrix}<br>    \right]<br>$$<br>表示叶片湿度概率矩阵(emittion probability matrix)<br>B[i][j]表示i天气下叶片为j湿度的概率  </p>
+<h2 id="问题分析"><a href="#问题分析" class="headerlink" title="问题分析"></a>问题分析</h2><p>viterbi算法其实是一个dp算法<br>不难发现<br>假设weather[]是天气数组<br>如果要求第K天天气为<code>weather[i]</code> 的最大概率<br>那么可以通过比较K-1天从<code>weather[0],weather[1],weather[2]</code>转移到K天的天气概率,取最大的概率<br>这是一个重叠的子问题(类似于多阶段决策?)<br>那么我们先求出第一天最大概率的天气<br>然后求出第二天 第三天…直到第N天<br>题目给了我们第一天的数据 包括天气概率和叶片湿度<br>那么第一天是<br>sunny的概率为:<code>0.63 * b[0][input[0]]</code><br>cloudy的概率为:<code>0.17 * b[1][input[0]</code><br>rainy的概率为:<code>0.2 * b[2][input[0]]</code><br>从而求出第二天的概率分布<br><figure class="highlight c++"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br></pre></td><td class="code"><pre><span class="line">dp[<span class="number">1</span>][i]=max(dp[<span class="number">0</span>][k]*a[k][i]*b[i][input[<span class="number">1</span>]])</span><br><span class="line">            i,k=sunny,cloudy,rainy</span><br></pre></td></tr></table></figure></p>
+<p>很容易理解 就和最短路floyd算法的路径转移差不多<br>从前一天的k天气转移到后一天的i天气再转移到后一天的叶片湿度情况 然后取最大的那个<br>如此递推 求到N天的概率分布  答案就是<code>dp[N][0],dp[N][1],dp[N][2]</code>中最大的<br>题目还需要打印路径 用一个path数组记录即可 最后逆向输出  用stack还是vector还是裸的数组都没事 和viterbi算法本身关系不大<br>题目差不多讲完了 也通过了具体例子来描述viterbi  先给出例子的代码  之后我们再来分析一下viterbi算法想要解决的问题和思想以及应用  </p>
+<h2 id="实现"><a href="#实现" class="headerlink" title="实现"></a>实现</h2><p>代码如果没兴趣的话可以跳过不看  </p>
+<pre><code class="C++"><span class="comment">//C++ code</span>
+<span class="meta">#<span class="meta-keyword">include</span><span class="meta-string">&lt;bits/stdc++.h&gt;</span></span>
+
+<span class="keyword">using</span> <span class="keyword">namespace</span> <span class="built_in">std</span>;
+
+<span class="keyword">const</span> <span class="keyword">double</span> INF=<span class="number">1e7</span>;
+<span class="keyword">const</span> <span class="keyword">double</span> a[<span class="number">3</span>][<span class="number">3</span>]={
+    {<span class="number">0.5</span>,<span class="number">0.375</span>,<span class="number">0.125</span>},
+    {<span class="number">0.25</span>,<span class="number">0.125</span>,<span class="number">0.625</span>},
+    {<span class="number">0.25</span>,<span class="number">0.375</span>,<span class="number">0.375</span>}
+};<span class="comment">//trans matrix</span>
+
+<span class="keyword">const</span> <span class="keyword">double</span> b[<span class="number">3</span>][<span class="number">4</span>]={
+    {<span class="number">0.6</span>,<span class="number">0.2</span>,<span class="number">0.15</span>,<span class="number">0.05</span>},
+    {<span class="number">0.25</span>,<span class="number">0.3</span>,<span class="number">0.2</span>,<span class="number">0.25</span>},
+    {<span class="number">0.05</span>,<span class="number">0.10</span>,<span class="number">0.35</span>,<span class="number">0.50</span>}
+};<span class="comment">//emit matrix</span>
+
+<span class="keyword">int</span> input[<span class="number">55</span>];<span class="comment">//humidity of leaves  input[day]</span>
+<span class="keyword">double</span> dp[<span class="number">55</span>][<span class="number">3</span>];<span class="comment">//answers dp[day][weather]</span>
+<span class="keyword">int</span> path[<span class="number">55</span>][<span class="number">3</span>];<span class="comment">//print trans matrix  path[day][weather]</span>
+
+<span class="function"><span class="keyword">inline</span> <span class="keyword">int</span> <span class="title">index</span><span class="params">(<span class="built_in">string</span> a)</span></span>{
+    <span class="keyword">if</span>(a==<span class="string">"Dry"</span>) <span class="keyword">return</span> <span class="number">0</span>;
+    <span class="keyword">else</span> <span class="keyword">if</span>(a==<span class="string">"Dryish"</span>) <span class="keyword">return</span> <span class="number">1</span>;
+    <span class="keyword">else</span> <span class="keyword">if</span>(a==<span class="string">"Damp"</span>) <span class="keyword">return</span> <span class="number">2</span>;
+    <span class="keyword">else</span> <span class="keyword">if</span>(a==<span class="string">"Soggy"</span>) <span class="keyword">return</span> <span class="number">3</span>;
+    <span class="keyword">return</span> <span class="number">-1</span>;
+}
+
+<span class="function"><span class="keyword">inline</span> <span class="built_in">string</span> <span class="title">index</span><span class="params">(<span class="keyword">int</span> a)</span></span>{
+    <span class="keyword">if</span>(a==<span class="number">0</span>) <span class="keyword">return</span> <span class="string">"Sunny"</span>;
+    <span class="keyword">else</span> <span class="keyword">if</span>(a==<span class="number">1</span>) <span class="keyword">return</span> <span class="string">"Cloudy"</span>;
+    <span class="keyword">else</span> <span class="keyword">if</span>(a==<span class="number">2</span>) <span class="keyword">return</span> <span class="string">"Rainy"</span>;
+    <span class="keyword">return</span> <span class="literal">nullptr</span>;
+}
+
+<span class="function"><span class="keyword">inline</span> <span class="keyword">void</span> <span class="title">init</span><span class="params">()</span></span>{
+    dp[<span class="number">0</span>][<span class="number">0</span>]=<span class="built_in">log</span>(<span class="number">0.63</span>*b[<span class="number">0</span>][input[<span class="number">0</span>]]);
+    dp[<span class="number">0</span>][<span class="number">1</span>]=<span class="built_in">log</span>(<span class="number">0.17</span>*b[<span class="number">1</span>][input[<span class="number">0</span>]]);
+    dp[<span class="number">0</span>][<span class="number">2</span>]=<span class="built_in">log</span>(<span class="number">0.2</span>*b[<span class="number">2</span>][input[<span class="number">0</span>]]);
+    <span class="keyword">return</span>;
+}
+
+
+
+<span class="function"><span class="keyword">int</span> <span class="title">main</span><span class="params">()</span> </span>{
+    <span class="comment">// #ifndef ONLINE_JUDGE</span>
+    <span class="comment">// freopen("input.in","r",stdin);</span>
+    <span class="comment">// #endif</span>
+    <span class="comment">// int begin_time=clock();</span>
+    <span class="keyword">int</span> t;
+    <span class="built_in">cin</span>&gt;&gt;t;
+    <span class="keyword">int</span> kase=<span class="number">1</span>;
+    <span class="keyword">while</span>(t--){
+        init();
+        <span class="keyword">int</span> n;
+        <span class="built_in">cin</span>&gt;&gt;n;
+        <span class="keyword">for</span>(<span class="keyword">int</span> i=<span class="number">0</span>;i&lt;n;i++){
+            <span class="built_in">string</span> leaf;
+            <span class="built_in">cin</span>&gt;&gt;leaf;
+            input[i]=index(leaf);
+        }
+        <span class="keyword">for</span>(<span class="keyword">int</span> i=<span class="number">1</span>;i&lt;n;i++){
+            <span class="keyword">for</span>(<span class="keyword">int</span> j=<span class="number">0</span>;j&lt;<span class="number">3</span>;j++){
+                dp[i][j]=-INF;
+                path[i][j]=<span class="number">-1</span>;
+                <span class="keyword">for</span>(<span class="keyword">int</span> k=<span class="number">0</span>;k&lt;<span class="number">3</span>;k++){
+                    <span class="keyword">if</span>(dp[i][j]&lt;dp[i<span class="number">-1</span>][k]+<span class="built_in">log</span>(a[k][j]*b[j][input[i]])){
+                        dp[i][j]=dp[i<span class="number">-1</span>][k]+<span class="built_in">log</span>(a[k][j]*b[j][input[i]]);
+                        path[i][j]=k;
+                    }
+                }
+            }
+        }
+        <span class="keyword">double</span> maxp=-INF;
+        <span class="keyword">int</span> maxn=<span class="number">-1</span>;
+        <span class="keyword">for</span>(<span class="keyword">int</span> i=<span class="number">0</span>;i&lt;<span class="number">3</span>;i++){
+            <span class="keyword">if</span>(dp[n<span class="number">-1</span>][i]&gt;maxp){
+                maxp=dp[n<span class="number">-1</span>][i];
+                maxn=i;
+            }
+        }
+        <span class="built_in">stack</span>&lt;<span class="keyword">int</span>&gt; ans;
+        ans.push(maxn);
+        <span class="keyword">for</span>(<span class="keyword">int</span> i=n<span class="number">-1</span>;i&gt;<span class="number">0</span>;i--){
+            ans.push(path[i][maxn]);
+            maxn=path[i][maxn];
+        }
+        <span class="built_in">printf</span>(<span class="string">"Case #%d:\n"</span>,kase++);
+        <span class="keyword">while</span>(!ans.empty()){
+            <span class="built_in">cout</span>&lt;&lt;index(ans.top())&lt;&lt;<span class="built_in">endl</span>;
+            ans.pop();
+        }
+    }
+    <span class="comment">// cout&lt;&lt;"time use: "&lt;&lt;clock()-begin_time&lt;&lt;" ms"&lt;&lt;endl;</span>
+    <span class="keyword">return</span> <span class="number">0</span>;
+}
+</code></pre>
+<h2 id="缺点改进"><a href="#缺点改进" class="headerlink" title="缺点改进:"></a>缺点改进:</h2><p>viterbi算法在数学逻辑上是没有问题的 但是在计算机科学中会有一点问题  问题出在概率的计算上面<br>我们知道 计算机在进行浮点运算的时候会有误差(具体可以了解IEEE 754)<br>特别的是 计算机在进行很小的浮点数时候会有明显的下溢<br>而概率计算中 随着马尔科夫链的增长 链可能性的增多 各个可能性的概率会慢慢下降 如果仍然进行乘法运算 下溢不可避免 从而造成不可避免的误差<br>所以我们需要想一个办法 本篇开头的题目中有一个小小的hint 不知是否注意到</p>
+<blockquote>
+<p>Log is useful.</p>
+</blockquote>
+<p>我们知道 $ \log(a*b)=\log(a)+\log(b) $<br>并且对于较小的x,log(x)可以起到放大绝对值值的作用<br>从而避开了概率越算越小的情况  </p>
+<h2 id="思想"><a href="#思想" class="headerlink" title="思想"></a>思想</h2><p>viterbi算法是一个典型的概率dp算法<br>求解HMM模型可以使用暴力算法 不过这样的复杂度是难以忍受的<br>而通过记录上一个状态的答案求解下一个状态  拿空间换时间 可以大大减降低复杂度<br>这也是dp(动态规划)算法的优势所在  </p>
+<h2 id="review"><a href="#review" class="headerlink" title="review:"></a>review:</h2><p>最后我们复习一下viterbi算法所要解决的问题<br>我们通过可以观测的现象,和已知的一些状态转换的概率情况,通过综合状态转换的概率和<strong>前一个状态情况</strong>来求得下一个状态的情况,也可以记录整条马尔科夫链,并输出.  </p>
+<h2 id="应用"><a href="#应用" class="headerlink" title="应用:"></a>应用:</h2><p>HMM是一个模型 通过viterbi算法 当然我们可以用来解决开篇提到的天气预测问题<br>也可以解决其他的<strong>预测问题</strong>和<strong>解码问题</strong>等  </p>
+
+      
+    </div>
+    
+    
+    
+
+    
+
+    
+
+    
+
+    <footer class="post-footer">
+      
+        <div class="post-tags">
+          
+            <a href="/tags/viterbi/" rel="tag"># viterbi</a>
+          
+        </div>
+      
+
+      
+      
+      
+
+      
+        <div class="post-nav">
+          <div class="post-nav-next post-nav-item">
+            
+              <a href="/2018/02/07/HDOJ1760/" rel="next" title="HDOJ1760">
+                <i class="fa fa-chevron-left"></i> HDOJ1760
+              </a>
+            
+          </div>
+
+          <span class="post-nav-divider"></span>
+
+          <div class="post-nav-prev post-nav-item">
+            
+              <a href="/2018/03/24/HDOJ3468/" rel="prev" title="HDOJ3468">
+                HDOJ3468 <i class="fa fa-chevron-right"></i>
+              </a>
+            
+          </div>
+        </div>
+      
+
+      
+      
+    </footer>
+  </div>
+  
+  
+  
+  </article>
+
+
+
+    <div class="post-spread">
+      
+    </div>
+  </div>
+
+
+          </div>
+          
+
+
+          
+
+  
+
+
+
+        </div>
+        
+          
+  
+  <div class="sidebar-toggle">
+    <div class="sidebar-toggle-line-wrap">
+      <span class="sidebar-toggle-line sidebar-toggle-line-first"></span>
+      <span class="sidebar-toggle-line sidebar-toggle-line-middle"></span>
+      <span class="sidebar-toggle-line sidebar-toggle-line-last"></span>
+    </div>
+  </div>
+
+  <aside id="sidebar" class="sidebar">
+    
+    <div class="sidebar-inner">
+
+      
+
+      
+        <ul class="sidebar-nav motion-element">
+          <li class="sidebar-nav-toc sidebar-nav-active" data-target="post-toc-wrap">
+            文章目录
+          </li>
+          <li class="sidebar-nav-overview" data-target="site-overview-wrap">
+            站点概览
+          </li>
+        </ul>
+      
+
+      <section class="site-overview-wrap sidebar-panel">
+        <div class="site-overview">
+          <div class="site-author motion-element" itemprop="author" itemscope itemtype="http://schema.org/Person">
+            
+              <p class="site-author-name" itemprop="name">Hanano_Yuuki</p>
+              <p class="site-description motion-element" itemprop="description"></p>
+          </div>
+
+          <nav class="site-state motion-element">
+
+            
+              <div class="site-state-item site-state-posts">
+              
+                <a href="/archives">
+              
+                  <span class="site-state-item-count">10</span>
+                  <span class="site-state-item-name">日志</span>
+                </a>
+              </div>
+            
+
+            
+              
+              
+              <div class="site-state-item site-state-categories">
+                <a href="/categories/index.html">
+                  <span class="site-state-item-count">5</span>
+                  <span class="site-state-item-name">分类</span>
+                </a>
+              </div>
+            
+
+            
+              
+              
+              <div class="site-state-item site-state-tags">
+                <a href="/tags/index.html">
+                  <span class="site-state-item-count">8</span>
+                  <span class="site-state-item-name">标签</span>
+                </a>
+              </div>
+            
+
+          </nav>
+
+          
+
+          
+
+          
+          
+
+          
+          
+
+          
+
+        </div>
+      </section>
+
+      
+      <!--noindex-->
+        <section class="post-toc-wrap motion-element sidebar-panel sidebar-panel-active">
+          <div class="post-toc">
+
+            
+              
+            
+
+            
+              <div class="post-toc-content"><ol class="nav"><li class="nav-item nav-level-1"><a class="nav-link" href="#markov-chain"><span class="nav-number">1.</span> <span class="nav-text">markov chain</span></a></li><li class="nav-item nav-level-1"><a class="nav-link" href="#Hidden-Markov-Model"><span class="nav-number">2.</span> <span class="nav-text">Hidden Markov Model</span></a></li><li class="nav-item nav-level-1"><a class="nav-link" href="#viterbi-algorithm"><span class="nav-number">3.</span> <span class="nav-text">viterbi algorithm</span></a><ol class="nav-child"><li class="nav-item nav-level-2"><a class="nav-link" href="#数学工具支撑"><span class="nav-number">3.1.</span> <span class="nav-text">数学工具支撑</span></a></li><li class="nav-item nav-level-2"><a class="nav-link" href="#问题分析"><span class="nav-number">3.2.</span> <span class="nav-text">问题分析</span></a></li><li class="nav-item nav-level-2"><a class="nav-link" href="#实现"><span class="nav-number">3.3.</span> <span class="nav-text">实现</span></a></li><li class="nav-item nav-level-2"><a class="nav-link" href="#缺点改进"><span class="nav-number">3.4.</span> <span class="nav-text">缺点改进:</span></a></li><li class="nav-item nav-level-2"><a class="nav-link" href="#思想"><span class="nav-number">3.5.</span> <span class="nav-text">思想</span></a></li><li class="nav-item nav-level-2"><a class="nav-link" href="#review"><span class="nav-number">3.6.</span> <span class="nav-text">review:</span></a></li><li class="nav-item nav-level-2"><a class="nav-link" href="#应用"><span class="nav-number">3.7.</span> <span class="nav-text">应用:</span></a></li></ol></li></ol></div>
+            
+
+          </div>
+        </section>
+      <!--/noindex-->
+      
+
+      
+
+    </div>
+  </aside>
+
+
+        
+      </div>
+    </main>
+
+    <footer id="footer" class="footer">
+      <div class="footer-inner">
+        <div class="copyright">&copy; <span itemprop="copyrightYear">2018</span>
+  <span class="with-love">
+    <i class="fa fa-user"></i>
+  </span>
+  <span class="author" itemprop="copyrightHolder">Hanano_Yuuki</span>
+
+  
+</div>
+
+
+  <div class="powered-by">由 <a class="theme-link" target="_blank" href="https://hexo.io">Hexo</a> 强力驱动</div>
+
+
+
+  <span class="post-meta-divider">|</span>
+
+
+
+  <div class="theme-info">主题 &mdash; <a class="theme-link" target="_blank" href="https://github.com/iissnan/hexo-theme-next">NexT.Pisces</a> v5.1.4</div>
+
+
+
+
+        
+
+
+
+
+
+
+
+        
+      </div>
+    </footer>
+
+    
+      <div class="back-to-top">
+        <i class="fa fa-arrow-up"></i>
+        
+      </div>
+    
+
+    
+
+  </div>
+
+  
+
+<script type="text/javascript">
+  if (Object.prototype.toString.call(window.Promise) !== '[object Function]') {
+    window.Promise = null;
+  }
+</script>
+
+
+
+
+
+
+
+
+
+  
+
+
+  
+
+
+
+
+
+
+
+
+
+
+
+  
+  
+    <script type="text/javascript" src="/lib/jquery/index.js?v=2.1.3"></script>
+  
+
+  
+  
+    <script type="text/javascript" src="/lib/fastclick/lib/fastclick.min.js?v=1.0.6"></script>
+  
+
+  
+  
+    <script type="text/javascript" src="/lib/jquery_lazyload/jquery.lazyload.js?v=1.9.7"></script>
+  
+
+  
+  
+    <script type="text/javascript" src="/lib/velocity/velocity.min.js?v=1.2.1"></script>
+  
+
+  
+  
+    <script type="text/javascript" src="/lib/velocity/velocity.ui.min.js?v=1.2.1"></script>
+  
+
+  
+  
+    <script type="text/javascript" src="/lib/fancybox/source/jquery.fancybox.pack.js?v=2.1.5"></script>
+  
+
+  
+  
+    <script type="text/javascript" src="/lib/canvas-nest/canvas-nest.min.js"></script>
+  
+
+
+  
+
+
+  <script type="text/javascript" src="/js/src/utils.js?v=5.1.4"></script>
+
+  <script type="text/javascript" src="/js/src/motion.js?v=5.1.4"></script>
+
+
+
+  
+  
+
+
+  <script type="text/javascript" src="/js/src/affix.js?v=5.1.4"></script>
+
+  <script type="text/javascript" src="/js/src/schemes/pisces.js?v=5.1.4"></script>
+
+
+
+  
+  <script type="text/javascript" src="/js/src/scrollspy.js?v=5.1.4"></script>
+<script type="text/javascript" src="/js/src/post-details.js?v=5.1.4"></script>
+
+
+
+  
+
+
+  <script type="text/javascript" src="/js/src/bootstrap.js?v=5.1.4"></script>
+
+
+
+  
+
+
+  
+
+
+
+
+	
+
+
+
+
+
+  
+
+
+
+
+
+  
+
+
+
+
+
+
+
+
+
+
+
+
+  
+
+
+
+
+
+  
+
+  
+
+  
+
+  
+  
+
+  
+  
+    <script type="text/x-mathjax-config">
+      MathJax.Hub.Config({
+        tex2jax: {
+          inlineMath: [ ['$','$'], ["\\(","\\)"]  ],
+          processEscapes: true,
+          skipTags: ['script', 'noscript', 'style', 'textarea', 'pre', 'code']
+        }
+      });
+    </script>
+
+    <script type="text/x-mathjax-config">
+      MathJax.Hub.Queue(function() {
+        var all = MathJax.Hub.getAllJax(), i;
+        for (i=0; i < all.length; i += 1) {
+          all[i].SourceElement().parentNode.className += ' has-jax';
+        }
+      });
+    </script>
+    <script type="text/javascript" src="//cdnjs.cloudflare.com/ajax/libs/mathjax/2.7.1/MathJax.js?config=TeX-AMS-MML_HTMLorMML"></script>
+  
+
+
+  
+
+  
+
+  
+
+<script type="text/javascript"
+color="255,128,255" opacity='0.7' zIndex="-2" count="99" src="//cdn.bootcss.com/canvas-nest.js/1.0.0/canvas-nest.min.js"></script><!-- hexo-inject:begin --><!-- Begin: Injected MathJax -->
+<script type="text/x-mathjax-config">
+  MathJax.Hub.Config({"tex2jax":{"inlineMath":[["$","$"],["\\(","\\)"]],"skipTags":["script","noscript","style","textarea","pre","code"],"processEscapes":true},"TeX":{"equationNumbers":{"autoNumber":"AMS"}}});
+</script>
+
+<script type="text/x-mathjax-config">
+  MathJax.Hub.Queue(function() {
+    var all = MathJax.Hub.getAllJax(), i;
+    for(i=0; i < all.length; i += 1) {
+      all[i].SourceElement().parentNode.className += ' has-jax';
+    }
+  });
+</script>
+
+<script type="text/javascript" src="https://cdnjs.cloudflare.com/ajax/libs/mathjax/2.7.1/MathJax.js">
+</script>
+<!-- End: Injected MathJax -->
+<!-- hexo-inject:end -->
+
+  
+</body>
+</html>

@@ -1,0 +1,2225 @@
+<!DOCTYPE html>
+
+
+
+  
+
+
+<html class="theme-next pisces use-motion" lang="zh-Hans">
+<head>
+  <!-- hexo-inject:begin --><!-- hexo-inject:end --><meta charset="UTF-8"/>
+<meta http-equiv="X-UA-Compatible" content="IE=edge" />
+<meta name="viewport" content="width=device-width, initial-scale=1, maximum-scale=1"/>
+<meta name="theme-color" content="#222">
+
+
+
+
+
+
+
+
+
+<meta http-equiv="Cache-Control" content="no-transform" />
+<meta http-equiv="Cache-Control" content="no-siteapp" />
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+  
+  
+  <link href="/lib/fancybox/source/jquery.fancybox.css?v=2.1.5" rel="stylesheet" type="text/css" />
+
+
+
+
+
+
+
+<link href="/lib/font-awesome/css/font-awesome.min.css?v=4.6.2" rel="stylesheet" type="text/css" />
+
+<link href="/css/main.css?v=5.1.4" rel="stylesheet" type="text/css" />
+
+
+  <link rel="apple-touch-icon" sizes="180x180" href="/images/apple-touch-icon-next.png?v=5.1.4">
+
+
+  <link rel="icon" type="image/png" sizes="32x32" href="/images/favicon-32x32-next.png?v=5.1.4">
+
+
+  <link rel="icon" type="image/png" sizes="16x16" href="/images/favicon-16x16-next.png?v=5.1.4">
+
+
+  <link rel="mask-icon" href="/images/logo.svg?v=5.1.4" color="#222">
+
+
+
+
+
+  <meta name="keywords" content="汇编," />
+
+
+
+
+
+
+
+
+
+
+<meta name="description" content="&amp;gt;  汇编指令速查表     指令 功能     AAA 调整加   AAD 调整除   AAM 调整乘   AAS 调整减   ADC 进位加   ADD 加   AND 与   ARPL 调整优先级   BOUND 检查数组   BSF 位右扫描   BSR 位左扫描   BSWAP 交换字节   BT 位测试   BTC 位测试求反   BTR 位测试清零   BTS 位测试置一">
+<meta name="keywords" content="汇编">
+<meta property="og:type" content="article">
+<meta property="og:title" content="汇编指令速查表">
+<meta property="og:url" content="http://yoursite.com/2018/02/04/汇编指令速查/index.html">
+<meta property="og:site_name" content="Hanano&#39;s Blog">
+<meta property="og:description" content="&amp;gt;  汇编指令速查表     指令 功能     AAA 调整加   AAD 调整除   AAM 调整乘   AAS 调整减   ADC 进位加   ADD 加   AND 与   ARPL 调整优先级   BOUND 检查数组   BSF 位右扫描   BSR 位左扫描   BSWAP 交换字节   BT 位测试   BTC 位测试求反   BTR 位测试清零   BTS 位测试置一">
+<meta property="og:locale" content="zh-Hans">
+<meta property="og:updated_time" content="2018-01-25T10:01:10.000Z">
+<meta name="twitter:card" content="summary">
+<meta name="twitter:title" content="汇编指令速查表">
+<meta name="twitter:description" content="&amp;gt;  汇编指令速查表     指令 功能     AAA 调整加   AAD 调整除   AAM 调整乘   AAS 调整减   ADC 进位加   ADD 加   AND 与   ARPL 调整优先级   BOUND 检查数组   BSF 位右扫描   BSR 位左扫描   BSWAP 交换字节   BT 位测试   BTC 位测试求反   BTR 位测试清零   BTS 位测试置一">
+
+
+
+<script type="text/javascript" id="hexo.configurations">
+  var NexT = window.NexT || {};
+  var CONFIG = {
+    root: '/',
+    scheme: 'Pisces',
+    version: '5.1.4',
+    sidebar: {"position":"right","display":"post","offset":12,"b2t":false,"scrollpercent":false,"onmobile":false},
+    fancybox: true,
+    tabs: true,
+    motion: {"enable":true,"async":false,"transition":{"post_block":"fadeIn","post_header":"slideDownIn","post_body":"slideDownIn","coll_header":"slideLeftIn","sidebar":"slideUpIn"}},
+    duoshuo: {
+      userId: '0',
+      author: '博主'
+    },
+    algolia: {
+      applicationID: '',
+      apiKey: '',
+      indexName: '',
+      hits: {"per_page":10},
+      labels: {"input_placeholder":"Search for Posts","hits_empty":"We didn't find any results for the search: ${query}","hits_stats":"${hits} results found in ${time} ms"}
+    }
+  };
+</script>
+
+
+
+  <link rel="canonical" href="http://yoursite.com/2018/02/04/汇编指令速查/"/>
+
+
+
+
+
+  <title>汇编指令速查表 | Hanano's Blog</title><!-- hexo-inject:begin --><!-- hexo-inject:end -->
+  
+
+
+
+
+
+
+
+
+</head>
+
+<body itemscope itemtype="http://schema.org/WebPage" lang="zh-Hans">
+
+  
+  
+    
+  
+
+  <!-- hexo-inject:begin --><!-- hexo-inject:end --><div class="container sidebar-position-right page-post-detail">
+    <div class="headband"></div>
+
+    <header id="header" class="header" itemscope itemtype="http://schema.org/WPHeader">
+      <div class="header-inner"><div class="site-brand-wrapper">
+  <div class="site-meta ">
+    
+
+    <div class="custom-logo-site-title">
+      <a href="/"  class="brand" rel="start">
+        <span class="logo-line-before"><i></i></span>
+        <span class="site-title">Hanano's Blog</span>
+        <span class="logo-line-after"><i></i></span>
+      </a>
+    </div>
+      
+        <p class="site-subtitle"></p>
+      
+  </div>
+
+  <div class="site-nav-toggle">
+    <button>
+      <span class="btn-bar"></span>
+      <span class="btn-bar"></span>
+      <span class="btn-bar"></span>
+    </button>
+  </div>
+</div>
+
+<nav class="site-nav">
+  
+
+  
+    <ul id="menu" class="menu">
+      
+        
+        <li class="menu-item menu-item-home">
+          <a href="/" rel="section">
+            
+              <i class="menu-item-icon fa fa-fw fa-home"></i> <br />
+            
+            首页
+          </a>
+        </li>
+      
+        
+        <li class="menu-item menu-item-tags">
+          <a href="/tags" rel="section">
+            
+              <i class="menu-item-icon fa fa-fw fa-tags"></i> <br />
+            
+            标签
+          </a>
+        </li>
+      
+        
+        <li class="menu-item menu-item-categories">
+          <a href="/categories" rel="section">
+            
+              <i class="menu-item-icon fa fa-fw fa-th"></i> <br />
+            
+            分类
+          </a>
+        </li>
+      
+        
+        <li class="menu-item menu-item-archives">
+          <a href="/archives" rel="section">
+            
+              <i class="menu-item-icon fa fa-fw fa-archive"></i> <br />
+            
+            归档
+          </a>
+        </li>
+      
+
+      
+    </ul>
+  
+
+  
+</nav>
+
+
+
+ </div>
+    </header>
+
+    <main id="main" class="main">
+      <div class="main-inner">
+        <div class="content-wrap">
+          <div id="content" class="content">
+            
+
+  <div id="posts" class="posts-expand">
+    
+
+  
+
+  
+  
+  
+
+  <article class="post post-type-normal" itemscope itemtype="http://schema.org/Article">
+  
+  
+  
+  <div class="post-block">
+    <link itemprop="mainEntityOfPage" href="http://yoursite.com/2018/02/04/汇编指令速查/">
+
+    <span hidden itemprop="author" itemscope itemtype="http://schema.org/Person">
+      <meta itemprop="name" content="Hanano_Yuuki">
+      <meta itemprop="description" content="">
+      <meta itemprop="image" content="/images/avatar.gif">
+    </span>
+
+    <span hidden itemprop="publisher" itemscope itemtype="http://schema.org/Organization">
+      <meta itemprop="name" content="Hanano's Blog">
+    </span>
+
+    
+      <header class="post-header">
+
+        
+        
+          <h1 class="post-title" itemprop="name headline">汇编指令速查表</h1>
+        
+
+        <div class="post-meta">
+          <span class="post-time">
+            
+              <span class="post-meta-item-icon">
+                <i class="fa fa-calendar-o"></i>
+              </span>
+              
+                <span class="post-meta-item-text">发表于</span>
+              
+              <time title="创建于" itemprop="dateCreated datePublished" datetime="2018-02-04T01:08:08+08:00">
+                2018-02-04
+              </time>
+            
+
+            
+
+            
+          </span>
+
+          
+            <span class="post-category" >
+            
+              <span class="post-meta-divider">|</span>
+            
+              <span class="post-meta-item-icon">
+                <i class="fa fa-folder-o"></i>
+              </span>
+              
+                <span class="post-meta-item-text">分类于</span>
+              
+              
+                <span itemprop="about" itemscope itemtype="http://schema.org/Thing">
+                  <a href="/categories/杂/" itemprop="url" rel="index">
+                    <span itemprop="name">杂</span>
+                  </a>
+                </span>
+
+                
+                
+              
+            </span>
+          
+
+          
+            
+          
+
+          
+          
+
+          
+
+          
+
+          
+
+        </div>
+      </header>
+    
+
+    
+    
+    
+    <div class="post-body" itemprop="articleBody">
+
+      
+      
+
+      
+        <p>&gt;</p>
+<blockquote>
+<p>汇编指令速查表</p>
+</blockquote>
+<table>
+<thead>
+<tr>
+<th>指令</th>
+<th>功能</th>
+</tr>
+</thead>
+<tbody>
+<tr>
+<td>AAA</td>
+<td>调整加</td>
+</tr>
+<tr>
+<td>AAD</td>
+<td>调整除</td>
+</tr>
+<tr>
+<td>AAM</td>
+<td>调整乘</td>
+</tr>
+<tr>
+<td>AAS</td>
+<td>调整减</td>
+</tr>
+<tr>
+<td>ADC</td>
+<td>进位加</td>
+</tr>
+<tr>
+<td>ADD</td>
+<td>加</td>
+</tr>
+<tr>
+<td>AND</td>
+<td>与</td>
+</tr>
+<tr>
+<td>ARPL</td>
+<td>调整优先级</td>
+</tr>
+<tr>
+<td>BOUND</td>
+<td>检查数组</td>
+</tr>
+<tr>
+<td>BSF</td>
+<td>位右扫描</td>
+</tr>
+<tr>
+<td>BSR</td>
+<td>位左扫描</td>
+</tr>
+<tr>
+<td>BSWAP</td>
+<td>交换字节</td>
+</tr>
+<tr>
+<td>BT</td>
+<td>位测试</td>
+</tr>
+<tr>
+<td>BTC</td>
+<td>位测试求反</td>
+</tr>
+<tr>
+<td>BTR</td>
+<td>位测试清零</td>
+</tr>
+<tr>
+<td>BTS</td>
+<td>位测试置一</td>
+</tr>
+<tr>
+<td>CALL</td>
+<td>过程调用</td>
+</tr>
+<tr>
+<td>CBW</td>
+<td>转换字节</td>
+</tr>
+<tr>
+<td>CDQ</td>
+<td>转换双字</td>
+</tr>
+<tr>
+<td>CLC</td>
+<td>进位清零</td>
+</tr>
+<tr>
+<td>CLD</td>
+<td>方向清零</td>
+</tr>
+<tr>
+<td>CLI</td>
+<td>中断清零</td>
+</tr>
+<tr>
+<td>CLTS</td>
+<td>任务清除</td>
+</tr>
+<tr>
+<td>CMC</td>
+<td>进位求反</td>
+</tr>
+<tr>
+<td>CMOVA</td>
+<td>高于传送</td>
+</tr>
+<tr>
+<td>CMOVB</td>
+<td>低于传送</td>
+</tr>
+<tr>
+<td>CMOVE</td>
+<td>相等传送</td>
+</tr>
+<tr>
+<td>CMOVG</td>
+<td>大于传送</td>
+</tr>
+<tr>
+<td>CMOVL</td>
+<td>小于传送</td>
+</tr>
+<tr>
+<td>CMOVNA</td>
+<td>不高于传送</td>
+</tr>
+<tr>
+<td>CMOVNB</td>
+<td>不低于传送</td>
+</tr>
+<tr>
+<td>CMOVNE</td>
+<td>不等传送</td>
+</tr>
+<tr>
+<td>CMOVNG</td>
+<td>不大于传送</td>
+</tr>
+<tr>
+<td>CMOVNL</td>
+<td>不小于传送</td>
+</tr>
+<tr>
+<td>CMOVNO</td>
+<td>不溢出传送</td>
+</tr>
+<tr>
+<td>CMOVNP</td>
+<td>非奇偶传送</td>
+</tr>
+<tr>
+<td>CMOVNS</td>
+<td>非负传送</td>
+</tr>
+<tr>
+<td>CMOVO</td>
+<td>溢出传送</td>
+</tr>
+<tr>
+<td>CMOVP</td>
+<td>奇偶传送</td>
+</tr>
+<tr>
+<td>CMOVS</td>
+<td>负号传送</td>
+</tr>
+<tr>
+<td>CMP</td>
+<td>比较</td>
+</tr>
+<tr>
+<td>CMPSB</td>
+<td>比较字节串</td>
+</tr>
+<tr>
+<td>CMPSD</td>
+<td>比较双字串</td>
+</tr>
+<tr>
+<td>CMPSW</td>
+<td>比较字串</td>
+</tr>
+<tr>
+<td>CMPXCHG</td>
+<td>比较交换</td>
+</tr>
+<tr>
+<td>CMPXCHG486</td>
+<td>比较交换486</td>
+</tr>
+<tr>
+<td>CMPXCHG8B</td>
+<td>比较交换8字节</td>
+</tr>
+<tr>
+<td>CPUID</td>
+<td>CPU标识</td>
+</tr>
+<tr>
+<td>CWD</td>
+<td>转换字</td>
+</tr>
+<tr>
+<td>CWDE</td>
+<td>扩展字</td>
+</tr>
+<tr>
+<td>DAA</td>
+<td>调整加十</td>
+</tr>
+<tr>
+<td>DAS</td>
+<td>调整减十</td>
+</tr>
+<tr>
+<td>DEC</td>
+<td>减一</td>
+</tr>
+<tr>
+<td>DIV</td>
+<td>除</td>
+</tr>
+<tr>
+<td>ENTER</td>
+<td>建立堆栈帧</td>
+</tr>
+<tr>
+<td>HLT</td>
+<td>停</td>
+</tr>
+<tr>
+<td>IDIV</td>
+<td>符号整除</td>
+</tr>
+<tr>
+<td>IMUL</td>
+<td>符号乘法</td>
+</tr>
+<tr>
+<td>IN</td>
+<td>端口输入</td>
+</tr>
+<tr>
+<td>INC</td>
+<td>加一</td>
+</tr>
+<tr>
+<td>INSB</td>
+<td>端口输入字节串</td>
+</tr>
+<tr>
+<td>INSD</td>
+<td>端口输入双字串</td>
+</tr>
+<tr>
+<td>INSW</td>
+<td>端口输入字串</td>
+</tr>
+<tr>
+<td>JA</td>
+<td>高于跳转</td>
+</tr>
+<tr>
+<td>JB</td>
+<td>低于跳转</td>
+</tr>
+<tr>
+<td>JBE</td>
+<td>不高于跳转</td>
+</tr>
+<tr>
+<td>JCXZ</td>
+<td>计数一六零跳转</td>
+</tr>
+<tr>
+<td>JE</td>
+<td>相等跳转</td>
+</tr>
+<tr>
+<td>JECXZ</td>
+<td>计数三二零跳转</td>
+</tr>
+<tr>
+<td>JG</td>
+<td>大于跳转</td>
+</tr>
+<tr>
+<td>JL</td>
+<td>小于跳转</td>
+</tr>
+<tr>
+<td>JMP</td>
+<td>跳转</td>
+</tr>
+<tr>
+<td>JMPE</td>
+<td>跳转扩展</td>
+</tr>
+<tr>
+<td>JNB</td>
+<td>不低于跳转</td>
+</tr>
+<tr>
+<td>JNE</td>
+<td>不等跳转</td>
+</tr>
+<tr>
+<td>JNG</td>
+<td>不大于跳转</td>
+</tr>
+<tr>
+<td>JNL</td>
+<td>不小于跳转</td>
+</tr>
+<tr>
+<td>JNO</td>
+<td>不溢出跳转</td>
+</tr>
+<tr>
+<td>JNP</td>
+<td>非奇偶跳转</td>
+</tr>
+<tr>
+<td>JNS</td>
+<td>非负跳转</td>
+</tr>
+<tr>
+<td>JO</td>
+<td>溢出跳转</td>
+</tr>
+<tr>
+<td>JP</td>
+<td>奇偶跳转</td>
+</tr>
+<tr>
+<td>JS</td>
+<td>负号跳转</td>
+</tr>
+<tr>
+<td>LAHF</td>
+<td>加载标志低八</td>
+</tr>
+<tr>
+<td>LAR</td>
+<td>加载访问权限</td>
+</tr>
+<tr>
+<td>LDS</td>
+<td>加载数据段</td>
+</tr>
+<tr>
+<td>LEA</td>
+<td>加载有效地址</td>
+</tr>
+<tr>
+<td>LEAVE</td>
+<td>清除过程堆栈</td>
+</tr>
+<tr>
+<td>LES</td>
+<td>加载附加段</td>
+</tr>
+<tr>
+<td>LFS</td>
+<td>加载标志段</td>
+</tr>
+<tr>
+<td>LGDT</td>
+<td>加载全局描述符</td>
+</tr>
+<tr>
+<td>LGS</td>
+<td>加载全局段</td>
+</tr>
+<tr>
+<td>LIDT</td>
+<td>加载中断描述符</td>
+</tr>
+<tr>
+<td>LMSW</td>
+<td>加载状态字</td>
+</tr>
+<tr>
+<td>LOADALL</td>
+<td>加载所有</td>
+</tr>
+<tr>
+<td>LOADALL286</td>
+<td>加载所有286</td>
+</tr>
+<tr>
+<td>LOCK</td>
+<td>锁</td>
+</tr>
+<tr>
+<td>LODSB</td>
+<td>加载源变址字节串</td>
+</tr>
+<tr>
+<td>LODSD</td>
+<td>加载源变址双字串</td>
+</tr>
+<tr>
+<td>LODSW</td>
+<td>加载源变址字串</td>
+</tr>
+<tr>
+<td>LOOP</td>
+<td>计数循环</td>
+</tr>
+<tr>
+<td>LOOPE</td>
+<td>相等循环</td>
+</tr>
+<tr>
+<td>LOOPNE</td>
+<td>不等循环</td>
+</tr>
+<tr>
+<td>LOOPNZ</td>
+<td>非零循环</td>
+</tr>
+<tr>
+<td>LOOPZ</td>
+<td>为零循环</td>
+</tr>
+<tr>
+<td>LSL</td>
+<td>加载段界限</td>
+</tr>
+<tr>
+<td>LSS</td>
+<td>加载堆栈段</td>
+</tr>
+<tr>
+<td>LTR</td>
+<td>加载任务</td>
+</tr>
+<tr>
+<td>MONITOR</td>
+<td>监视</td>
+</tr>
+<tr>
+<td>MOV</td>
+<td>传送</td>
+</tr>
+<tr>
+<td>MOVSB</td>
+<td>传送字节串</td>
+</tr>
+<tr>
+<td>MOVSD</td>
+<td>传送双字串</td>
+</tr>
+<tr>
+<td>MOVSW</td>
+<td>传送字串</td>
+</tr>
+<tr>
+<td>MOVSX</td>
+<td>符号传送</td>
+</tr>
+<tr>
+<td>MOVZX</td>
+<td>零传送</td>
+</tr>
+<tr>
+<td>MUL</td>
+<td>乘</td>
+</tr>
+<tr>
+<td>MWAIT</td>
+<td></td>
+</tr>
+<tr>
+<td>NEG</td>
+<td>求补</td>
+</tr>
+<tr>
+<td>NOP</td>
+<td>空</td>
+</tr>
+<tr>
+<td>NOT</td>
+<td>非</td>
+</tr>
+<tr>
+<td>OR</td>
+<td>或</td>
+</tr>
+<tr>
+<td>OUT</td>
+<td>端口输出</td>
+</tr>
+<tr>
+<td>OUTSB</td>
+<td>端口输出字节串</td>
+</tr>
+<tr>
+<td>OUTSD</td>
+<td>端口输出双字串</td>
+</tr>
+<tr>
+<td>OUTSW</td>
+<td>端口输出字串</td>
+</tr>
+<tr>
+<td>POP</td>
+<td>出栈</td>
+</tr>
+<tr>
+<td>POPA</td>
+<td>全部出栈</td>
+</tr>
+<tr>
+<td>POPF</td>
+<td>标志出栈</td>
+</tr>
+<tr>
+<td>PUSH</td>
+<td>压栈</td>
+</tr>
+<tr>
+<td>PUSHA</td>
+<td>全部压栈</td>
+</tr>
+<tr>
+<td>PUSHF</td>
+<td>标志压栈</td>
+</tr>
+<tr>
+<td>RCL</td>
+<td>进位循环左移</td>
+</tr>
+<tr>
+<td>RCR</td>
+<td>进位循环右移</td>
+</tr>
+<tr>
+<td>RDMSR</td>
+<td>读专用模式</td>
+</tr>
+<tr>
+<td>RDPMC</td>
+<td>读执行监视计数</td>
+</tr>
+<tr>
+<td>RDSHR</td>
+<td></td>
+</tr>
+<tr>
+<td>RDTSC</td>
+<td>读时间戳计数</td>
+</tr>
+<tr>
+<td>REP</td>
+<td>重复</td>
+</tr>
+<tr>
+<td>REPE</td>
+<td>相等重复</td>
+</tr>
+<tr>
+<td>REPNE</td>
+<td>不等重复</td>
+</tr>
+<tr>
+<td>RET</td>
+<td>过程返回</td>
+</tr>
+<tr>
+<td>RETF</td>
+<td>远过程返回</td>
+</tr>
+<tr>
+<td>RETN</td>
+<td>近过程返回</td>
+</tr>
+<tr>
+<td>ROL</td>
+<td>循环左移</td>
+</tr>
+<tr>
+<td>ROR</td>
+<td>循环右移</td>
+</tr>
+<tr>
+<td>RSM</td>
+<td>恢复系统管理</td>
+</tr>
+<tr>
+<td>SAHF</td>
+<td>恢复标志低八</td>
+</tr>
+<tr>
+<td>SAL</td>
+<td>算术左移</td>
+</tr>
+<tr>
+<td>SALC</td>
+<td></td>
+</tr>
+<tr>
+<td>SAR</td>
+<td>算术右移</td>
+</tr>
+<tr>
+<td>SBB</td>
+<td>借位减</td>
+</tr>
+<tr>
+<td>SCASB</td>
+<td>扫描字节串</td>
+</tr>
+<tr>
+<td>SCASD</td>
+<td>扫描双字串</td>
+</tr>
+<tr>
+<td>SCASW</td>
+<td>扫描字串</td>
+</tr>
+<tr>
+<td>SETA</td>
+<td>高于置位</td>
+</tr>
+<tr>
+<td>SETB</td>
+<td>低于置位</td>
+</tr>
+<tr>
+<td>SETE</td>
+<td>相等置位</td>
+</tr>
+<tr>
+<td>SETG</td>
+<td>大于置位</td>
+</tr>
+<tr>
+<td>SETL</td>
+<td>小于置位</td>
+</tr>
+<tr>
+<td>SETNA</td>
+<td>不高于置位</td>
+</tr>
+<tr>
+<td>SETNB</td>
+<td>不低于置位</td>
+</tr>
+<tr>
+<td>SETNE</td>
+<td>不等置位</td>
+</tr>
+<tr>
+<td>SETNG</td>
+<td>不大于置位</td>
+</tr>
+<tr>
+<td>SETNL</td>
+<td>不小于置位</td>
+</tr>
+<tr>
+<td>SETNO</td>
+<td>不溢出置位</td>
+</tr>
+<tr>
+<td>SETNP</td>
+<td>非奇偶置位</td>
+</tr>
+<tr>
+<td>SETNS</td>
+<td>非负置位</td>
+</tr>
+<tr>
+<td>SETO</td>
+<td>溢出置位</td>
+</tr>
+<tr>
+<td>SETP</td>
+<td>奇偶置位</td>
+</tr>
+<tr>
+<td>SETS</td>
+<td>负号置位</td>
+</tr>
+<tr>
+<td>SGDT</td>
+<td>保存全局描述符</td>
+</tr>
+<tr>
+<td>SHL</td>
+<td>逻辑左移</td>
+</tr>
+<tr>
+<td>SHLD</td>
+<td>双精度左移</td>
+</tr>
+<tr>
+<td>SHR</td>
+<td>逻辑右移</td>
+</tr>
+<tr>
+<td>SHRD</td>
+<td>双精度右移</td>
+</tr>
+<tr>
+<td>SIDT</td>
+<td>保存中断描述符</td>
+</tr>
+<tr>
+<td>SLDT</td>
+<td>保存局部描述符</td>
+</tr>
+<tr>
+<td>SMI</td>
+<td></td>
+</tr>
+<tr>
+<td>SMINT</td>
+<td></td>
+</tr>
+<tr>
+<td>SMINTOLD</td>
+<td></td>
+</tr>
+<tr>
+<td>SMSW</td>
+<td>保存状态字</td>
+</tr>
+<tr>
+<td>STC</td>
+<td>进位设置</td>
+</tr>
+<tr>
+<td>STD</td>
+<td>方向设置</td>
+</tr>
+<tr>
+<td>STI</td>
+<td>中断设置</td>
+</tr>
+<tr>
+<td>STOSB</td>
+<td>保存字节串</td>
+</tr>
+<tr>
+<td>STOSD</td>
+<td>保存双字串</td>
+</tr>
+<tr>
+<td>STOSW</td>
+<td>保存字串</td>
+</tr>
+<tr>
+<td>STR</td>
+<td>保存任务</td>
+</tr>
+<tr>
+<td>SUB</td>
+<td>减</td>
+</tr>
+<tr>
+<td>SYSCALL</td>
+<td>系统调用</td>
+</tr>
+<tr>
+<td>SYSENTER</td>
+<td>系统进入</td>
+</tr>
+<tr>
+<td>SYSEXIT</td>
+<td>系统退出</td>
+</tr>
+<tr>
+<td>SYSRET</td>
+<td>系统返回</td>
+</tr>
+<tr>
+<td>TEST</td>
+<td>数测试</td>
+</tr>
+<tr>
+<td>UD0</td>
+<td>未定义指令0</td>
+</tr>
+<tr>
+<td>UD1</td>
+<td>未定义指令1</td>
+</tr>
+<tr>
+<td>UD2</td>
+<td>未定义指令2</td>
+</tr>
+<tr>
+<td>UMOV</td>
+<td></td>
+</tr>
+<tr>
+<td>VERW</td>
+<td>校验写</td>
+</tr>
+<tr>
+<td>WAIT</td>
+<td>等</td>
+</tr>
+<tr>
+<td>WBINVD</td>
+<td>回写无效高速缓存</td>
+</tr>
+<tr>
+<td>WRMSR</td>
+<td>写专用模式</td>
+</tr>
+<tr>
+<td>WRSHR</td>
+<td></td>
+</tr>
+<tr>
+<td>XADD</td>
+<td>交换加</td>
+</tr>
+<tr>
+<td>XBTS</td>
+<td></td>
+</tr>
+<tr>
+<td>XCHG</td>
+<td>交换</td>
+</tr>
+<tr>
+<td>XLAT</td>
+<td>换码</td>
+</tr>
+<tr>
+<td>XOR</td>
+<td>异或</td>
+</tr>
+<tr>
+<td>XSTORE</td>
+<td></td>
+</tr>
+<tr>
+<td>EMMS</td>
+<td>媒体空MMX状态</td>
+</tr>
+<tr>
+<td>F2XM1</td>
+<td>浮点栈顶绝对值</td>
+</tr>
+<tr>
+<td>FADD</td>
+<td>浮点加</td>
+</tr>
+<tr>
+<td>FADDP</td>
+<td>浮点加出栈</td>
+</tr>
+<tr>
+<td>FBLD</td>
+<td>浮点加载十数</td>
+</tr>
+<tr>
+<td>FBSTP</td>
+<td>浮点保存十数出栈</td>
+</tr>
+<tr>
+<td>FCHS</td>
+<td>浮点正负求反</td>
+</tr>
+<tr>
+<td>FCLEX</td>
+<td>浮点检查错误清除</td>
+</tr>
+<tr>
+<td>FCMOVB</td>
+<td>浮点低于传送</td>
+</tr>
+<tr>
+<td>FCMOVBE</td>
+<td>浮点不高于传送</td>
+</tr>
+<tr>
+<td>FCMOVE</td>
+<td>浮点相等传送</td>
+</tr>
+<tr>
+<td>FCMOVNB</td>
+<td>浮点不低于传送</td>
+</tr>
+<tr>
+<td>FCMOVNBE</td>
+<td>浮点高于传送</td>
+</tr>
+<tr>
+<td>FCMOVNE</td>
+<td>浮点不等传送</td>
+</tr>
+<tr>
+<td>FCMOVNU</td>
+<td>浮点有序传送</td>
+</tr>
+<tr>
+<td>FCMOVU</td>
+<td>浮点无序传送</td>
+</tr>
+<tr>
+<td>FCOM</td>
+<td>浮点比较</td>
+</tr>
+<tr>
+<td>FCOMI</td>
+<td>浮点比较加载标志</td>
+</tr>
+<tr>
+<td>FCOMIP</td>
+<td>浮点比较加载标志出栈</td>
+</tr>
+<tr>
+<td>FCOMP</td>
+<td>浮点比较出栈</td>
+</tr>
+<tr>
+<td>FCOMPP</td>
+<td>浮点比较出栈二</td>
+</tr>
+<tr>
+<td>FCOS</td>
+<td>浮点余弦</td>
+</tr>
+<tr>
+<td>FDECSTP</td>
+<td>浮点栈针减一</td>
+</tr>
+<tr>
+<td>FDISI</td>
+<td>浮点检查禁止中断</td>
+</tr>
+<tr>
+<td>FDIV</td>
+<td>浮点除</td>
+</tr>
+<tr>
+<td>FDIVP</td>
+<td>浮点除出栈</td>
+</tr>
+<tr>
+<td>FDIVR</td>
+<td>浮点反除</td>
+</tr>
+<tr>
+<td>FDIVRP</td>
+<td>浮点反除出栈</td>
+</tr>
+<tr>
+<td>FENI</td>
+<td>浮点检查禁止中断二</td>
+</tr>
+<tr>
+<td>FFREE</td>
+<td>浮点释放</td>
+</tr>
+<tr>
+<td>FFREEP</td>
+<td>浮点释放出栈</td>
+</tr>
+<tr>
+<td>FIADD</td>
+<td>浮点加整数</td>
+</tr>
+<tr>
+<td>FICOM</td>
+<td>浮点比较整数</td>
+</tr>
+<tr>
+<td>FICOMP</td>
+<td>浮点比较整数出栈</td>
+</tr>
+<tr>
+<td>FIDIV</td>
+<td>浮点除整数</td>
+</tr>
+<tr>
+<td>FIDIVR</td>
+<td>浮点反除</td>
+</tr>
+<tr>
+<td>FILD</td>
+<td>浮点加载整数</td>
+</tr>
+<tr>
+<td>FIMUL</td>
+<td>浮点乘整数</td>
+</tr>
+<tr>
+<td>FINCSTP</td>
+<td>浮点栈针加一</td>
+</tr>
+<tr>
+<td>FINIT</td>
+<td>浮点检查初始化</td>
+</tr>
+<tr>
+<td>FIST</td>
+<td>浮点保存整数</td>
+</tr>
+<tr>
+<td>FISTP</td>
+<td>浮点保存整数出栈</td>
+</tr>
+<tr>
+<td>FISTTP</td>
+<td></td>
+</tr>
+<tr>
+<td>FISUB</td>
+<td>浮点减整数</td>
+</tr>
+<tr>
+<td>FISUBR</td>
+<td>浮点反减整数</td>
+</tr>
+<tr>
+<td>FLD</td>
+<td>浮点加载数</td>
+</tr>
+<tr>
+<td>FLD1</td>
+<td>浮点加载一</td>
+</tr>
+<tr>
+<td>FLDCW</td>
+<td>浮点加载控制器</td>
+</tr>
+<tr>
+<td>FLDENV</td>
+<td>浮点加载环境</td>
+</tr>
+<tr>
+<td>FLDL2E</td>
+<td>浮点加载L2E</td>
+</tr>
+<tr>
+<td>FLDL2T</td>
+<td>浮点加载L2T</td>
+</tr>
+<tr>
+<td>FLDLG2</td>
+<td>浮点加载LG2</td>
+</tr>
+<tr>
+<td>FLDLN2</td>
+<td>浮点加载LN2</td>
+</tr>
+<tr>
+<td>FLDPI</td>
+<td>浮点加载PI</td>
+</tr>
+<tr>
+<td>FLDZ</td>
+<td>浮点加载零</td>
+</tr>
+<tr>
+<td>FMUL</td>
+<td>浮点乘</td>
+</tr>
+<tr>
+<td>FMULP</td>
+<td>浮点乘出栈</td>
+</tr>
+<tr>
+<td>FNCLEX</td>
+<td>浮点不检查错误清除</td>
+</tr>
+<tr>
+<td>FNDISI</td>
+<td>浮点不检查禁止中断</td>
+</tr>
+<tr>
+<td>FNENI</td>
+<td>浮点不检查禁止中断二</td>
+</tr>
+<tr>
+<td>FNINIT</td>
+<td>浮点不检查初始化</td>
+</tr>
+<tr>
+<td>FNOP</td>
+<td>浮点空</td>
+</tr>
+<tr>
+<td>FNSAVE</td>
+<td>浮点不检查保存状态</td>
+</tr>
+<tr>
+<td>FNSTCW</td>
+<td>浮点不检查保存控制器</td>
+</tr>
+<tr>
+<td>FNSTENV</td>
+<td>浮点不检查保存环境</td>
+</tr>
+<tr>
+<td>FNSTSW</td>
+<td>浮点不检查保存状态器</td>
+</tr>
+<tr>
+<td>FPATAN</td>
+<td>浮点部分反正切</td>
+</tr>
+<tr>
+<td>FPREM</td>
+<td>浮点部分余数</td>
+</tr>
+<tr>
+<td>FPREM1</td>
+<td>浮点部分余数二</td>
+</tr>
+<tr>
+<td>FPTAN</td>
+<td>浮点部分正切</td>
+</tr>
+<tr>
+<td>FRNDINT</td>
+<td>浮点舍入求整</td>
+</tr>
+<tr>
+<td>FRSTOR</td>
+<td>浮点恢复状态</td>
+</tr>
+<tr>
+<td>FSAVE</td>
+<td>浮点检查保存状态</td>
+</tr>
+<tr>
+<td>FSCALE</td>
+<td>浮点比例运算</td>
+</tr>
+<tr>
+<td>FSETPM</td>
+<td>浮点设置保护</td>
+</tr>
+<tr>
+<td>FSIN</td>
+<td>浮点正弦</td>
+</tr>
+<tr>
+<td>FSINCOS</td>
+<td>浮点正余弦</td>
+</tr>
+<tr>
+<td>FSQRT</td>
+<td>浮点平方根</td>
+</tr>
+<tr>
+<td>FST</td>
+<td>浮点保存</td>
+</tr>
+<tr>
+<td>FSTCW</td>
+<td>浮点检查保存控制器</td>
+</tr>
+<tr>
+<td>FSTENV</td>
+<td>浮点检查保存环境</td>
+</tr>
+<tr>
+<td>FSTP</td>
+<td>浮点保存出栈</td>
+</tr>
+<tr>
+<td>FSTSW</td>
+<td>浮点检查保存状态器</td>
+</tr>
+<tr>
+<td>FSUB</td>
+<td>浮点减</td>
+</tr>
+<tr>
+<td>FSUBP</td>
+<td>浮点减出栈</td>
+</tr>
+<tr>
+<td>FSUBR</td>
+<td>浮点反减</td>
+</tr>
+<tr>
+<td>FSUBRP</td>
+<td>浮点反减出栈</td>
+</tr>
+<tr>
+<td>FTST</td>
+<td>浮点比零</td>
+</tr>
+<tr>
+<td>FUCOM</td>
+<td>浮点无序比较</td>
+</tr>
+<tr>
+<td>FUCOMI</td>
+<td>浮点反比加载标志</td>
+</tr>
+<tr>
+<td>FUCOMIP</td>
+<td>浮点反比加载标志出栈</td>
+</tr>
+<tr>
+<td>FUCOMP</td>
+<td>浮点无序比较出栈</td>
+</tr>
+<tr>
+<td>FUCOMPP</td>
+<td>浮点无序比较出栈二</td>
+</tr>
+<tr>
+<td>FWAIT</td>
+<td>浮点等</td>
+</tr>
+<tr>
+<td>FXAM</td>
+<td>浮点检查</td>
+</tr>
+<tr>
+<td>FXCH</td>
+<td>浮点交换</td>
+</tr>
+<tr>
+<td>FXTRACT</td>
+<td>浮点分解</td>
+</tr>
+<tr>
+<td>FYL2X</td>
+<td>浮点求L2X</td>
+</tr>
+<tr>
+<td>FYL2XP1</td>
+<td>浮点求L2XP1</td>
+</tr>
+<tr>
+<td>MOVED</td>
+<td>媒体双字传送</td>
+</tr>
+<tr>
+<td>MOVEQ</td>
+<td>媒体四字传送</td>
+</tr>
+<tr>
+<td>PACKSSDW</td>
+<td>媒体符号双字压缩</td>
+</tr>
+<tr>
+<td>PACKSSWB</td>
+<td>媒体符号字压缩</td>
+</tr>
+<tr>
+<td>PACKUSWB</td>
+<td>媒体无符号字压缩</td>
+</tr>
+<tr>
+<td>PADDB</td>
+<td>媒体截断字节加</td>
+</tr>
+<tr>
+<td>PADDD</td>
+<td>媒体截断双字加</td>
+</tr>
+<tr>
+<td>PADDSB</td>
+<td>媒体符号饱和字节加</td>
+</tr>
+<tr>
+<td>PADDSIW</td>
+<td></td>
+</tr>
+<tr>
+<td>PADDSW</td>
+<td>媒体符号饱和字加</td>
+</tr>
+<tr>
+<td>PADDUSB</td>
+<td>媒体无符号饱和字节加</td>
+</tr>
+<tr>
+<td>PADDUSW</td>
+<td>媒体无符号饱和字加</td>
+</tr>
+<tr>
+<td>PADDW</td>
+<td>媒体截断字加</td>
+</tr>
+<tr>
+<td>PAND</td>
+<td>媒体与</td>
+</tr>
+<tr>
+<td>PANDN</td>
+<td>媒体与非</td>
+</tr>
+<tr>
+<td>PAVEB</td>
+<td></td>
+</tr>
+<tr>
+<td>PCMPEQB</td>
+<td>媒体字节比等</td>
+</tr>
+<tr>
+<td>PCMPEQD</td>
+<td>媒体双字比等</td>
+</tr>
+<tr>
+<td>PCMPEQW</td>
+<td>媒体字比等</td>
+</tr>
+<tr>
+<td>PCMPGTB</td>
+<td>媒体字节比大</td>
+</tr>
+<tr>
+<td>PCMPGTD</td>
+<td>媒体双字比大</td>
+</tr>
+<tr>
+<td>PCMPGTW</td>
+<td>媒体字比大</td>
+</tr>
+<tr>
+<td>PDISTIB</td>
+<td></td>
+</tr>
+<tr>
+<td>PMACHRIW</td>
+<td></td>
+</tr>
+<tr>
+<td>PMADDWD</td>
+<td></td>
+</tr>
+<tr>
+<td>PMAGW</td>
+<td></td>
+</tr>
+<tr>
+<td>PMULHRIW</td>
+<td></td>
+</tr>
+<tr>
+<td>PMULHRWC</td>
+<td></td>
+</tr>
+<tr>
+<td>PMULHW</td>
+<td></td>
+</tr>
+<tr>
+<td>PMVGEZB</td>
+<td></td>
+</tr>
+<tr>
+<td>PMVLZB</td>
+<td></td>
+</tr>
+<tr>
+<td>PMVNZB</td>
+<td></td>
+</tr>
+<tr>
+<td>PMVZB</td>
+<td></td>
+</tr>
+<tr>
+<td>POR</td>
+<td>媒体或</td>
+</tr>
+<tr>
+<td>PSLLD</td>
+<td>媒体双字左移</td>
+</tr>
+<tr>
+<td>PSLLQ</td>
+<td>媒体四字左移</td>
+</tr>
+<tr>
+<td>PSLLW</td>
+<td>媒体字左移</td>
+</tr>
+<tr>
+<td>PSRAD</td>
+<td>媒体双字算术右移</td>
+</tr>
+<tr>
+<td>PSRAW</td>
+<td>媒体字算术右移</td>
+</tr>
+<tr>
+<td>PSRLD</td>
+<td>媒体双字右移</td>
+</tr>
+<tr>
+<td>PSRLQ</td>
+<td>媒体四字右移</td>
+</tr>
+<tr>
+<td>PSRLW</td>
+<td>媒体字右移</td>
+</tr>
+<tr>
+<td>PSUBB</td>
+<td>媒体截断字节减</td>
+</tr>
+<tr>
+<td>PSUBSB</td>
+<td>媒体符号饱和字节减</td>
+</tr>
+<tr>
+<td>PSUBSIW</td>
+<td></td>
+</tr>
+<tr>
+<td>PSUBSW</td>
+<td>媒体符号饱和字减</td>
+</tr>
+<tr>
+<td>PSUBUSB</td>
+<td>媒体无符号饱和字节减</td>
+</tr>
+<tr>
+<td>PSUBUSW</td>
+<td>媒体无符号饱和字减</td>
+</tr>
+<tr>
+<td>PSUBW</td>
+<td>媒体截断字减</td>
+</tr>
+<tr>
+<td>PUNPCKHBW</td>
+<td>媒体字节高位解压</td>
+</tr>
+<tr>
+<td>PUNPCKHDQ</td>
+<td>媒体双字高位解压</td>
+</tr>
+<tr>
+<td>PUNPCKHWD</td>
+<td>媒体字高位解压</td>
+</tr>
+<tr>
+<td>PUNPCKLBW</td>
+<td>媒体字节低位解压</td>
+</tr>
+<tr>
+<td>PUNPCKLDQ</td>
+<td>媒体双字低位解压</td>
+</tr>
+<tr>
+<td>PUNPCKLWD</td>
+<td>媒体字低位解压</td>
+</tr>
+</tbody>
+</table>
+
+      
+    </div>
+    
+    
+    
+
+    
+
+    
+
+    
+
+    <footer class="post-footer">
+      
+        <div class="post-tags">
+          
+            <a href="/tags/汇编/" rel="tag"># 汇编</a>
+          
+        </div>
+      
+
+      
+      
+      
+
+      
+        <div class="post-nav">
+          <div class="post-nav-next post-nav-item">
+            
+              <a href="/2018/02/04/data-struct-union_find_set/" rel="next" title="并查集介绍">
+                <i class="fa fa-chevron-left"></i> 并查集介绍
+              </a>
+            
+          </div>
+
+          <span class="post-nav-divider"></span>
+
+          <div class="post-nav-prev post-nav-item">
+            
+              <a href="/2018/02/05/UVA5070/" rel="prev" title="UVA5070">
+                UVA5070 <i class="fa fa-chevron-right"></i>
+              </a>
+            
+          </div>
+        </div>
+      
+
+      
+      
+    </footer>
+  </div>
+  
+  
+  
+  </article>
+
+
+
+    <div class="post-spread">
+      
+    </div>
+  </div>
+
+
+          </div>
+          
+
+
+          
+
+  
+
+
+
+        </div>
+        
+          
+  
+  <div class="sidebar-toggle">
+    <div class="sidebar-toggle-line-wrap">
+      <span class="sidebar-toggle-line sidebar-toggle-line-first"></span>
+      <span class="sidebar-toggle-line sidebar-toggle-line-middle"></span>
+      <span class="sidebar-toggle-line sidebar-toggle-line-last"></span>
+    </div>
+  </div>
+
+  <aside id="sidebar" class="sidebar">
+    
+    <div class="sidebar-inner">
+
+      
+
+      
+
+      <section class="site-overview-wrap sidebar-panel sidebar-panel-active">
+        <div class="site-overview">
+          <div class="site-author motion-element" itemprop="author" itemscope itemtype="http://schema.org/Person">
+            
+              <p class="site-author-name" itemprop="name">Hanano_Yuuki</p>
+              <p class="site-description motion-element" itemprop="description"></p>
+          </div>
+
+          <nav class="site-state motion-element">
+
+            
+              <div class="site-state-item site-state-posts">
+              
+                <a href="/archives">
+              
+                  <span class="site-state-item-count">10</span>
+                  <span class="site-state-item-name">日志</span>
+                </a>
+              </div>
+            
+
+            
+              
+              
+              <div class="site-state-item site-state-categories">
+                <a href="/categories/index.html">
+                  <span class="site-state-item-count">5</span>
+                  <span class="site-state-item-name">分类</span>
+                </a>
+              </div>
+            
+
+            
+              
+              
+              <div class="site-state-item site-state-tags">
+                <a href="/tags/index.html">
+                  <span class="site-state-item-count">8</span>
+                  <span class="site-state-item-name">标签</span>
+                </a>
+              </div>
+            
+
+          </nav>
+
+          
+
+          
+
+          
+          
+
+          
+          
+
+          
+
+        </div>
+      </section>
+
+      
+
+      
+
+    </div>
+  </aside>
+
+
+        
+      </div>
+    </main>
+
+    <footer id="footer" class="footer">
+      <div class="footer-inner">
+        <div class="copyright">&copy; <span itemprop="copyrightYear">2018</span>
+  <span class="with-love">
+    <i class="fa fa-user"></i>
+  </span>
+  <span class="author" itemprop="copyrightHolder">Hanano_Yuuki</span>
+
+  
+</div>
+
+
+  <div class="powered-by">由 <a class="theme-link" target="_blank" href="https://hexo.io">Hexo</a> 强力驱动</div>
+
+
+
+  <span class="post-meta-divider">|</span>
+
+
+
+  <div class="theme-info">主题 &mdash; <a class="theme-link" target="_blank" href="https://github.com/iissnan/hexo-theme-next">NexT.Pisces</a> v5.1.4</div>
+
+
+
+
+        
+
+
+
+
+
+
+
+        
+      </div>
+    </footer>
+
+    
+      <div class="back-to-top">
+        <i class="fa fa-arrow-up"></i>
+        
+      </div>
+    
+
+    
+
+  </div>
+
+  
+
+<script type="text/javascript">
+  if (Object.prototype.toString.call(window.Promise) !== '[object Function]') {
+    window.Promise = null;
+  }
+</script>
+
+
+
+
+
+
+
+
+
+  
+
+
+  
+
+
+
+
+
+
+
+
+
+
+
+  
+  
+    <script type="text/javascript" src="/lib/jquery/index.js?v=2.1.3"></script>
+  
+
+  
+  
+    <script type="text/javascript" src="/lib/fastclick/lib/fastclick.min.js?v=1.0.6"></script>
+  
+
+  
+  
+    <script type="text/javascript" src="/lib/jquery_lazyload/jquery.lazyload.js?v=1.9.7"></script>
+  
+
+  
+  
+    <script type="text/javascript" src="/lib/velocity/velocity.min.js?v=1.2.1"></script>
+  
+
+  
+  
+    <script type="text/javascript" src="/lib/velocity/velocity.ui.min.js?v=1.2.1"></script>
+  
+
+  
+  
+    <script type="text/javascript" src="/lib/fancybox/source/jquery.fancybox.pack.js?v=2.1.5"></script>
+  
+
+  
+  
+    <script type="text/javascript" src="/lib/canvas-nest/canvas-nest.min.js"></script>
+  
+
+
+  
+
+
+  <script type="text/javascript" src="/js/src/utils.js?v=5.1.4"></script>
+
+  <script type="text/javascript" src="/js/src/motion.js?v=5.1.4"></script>
+
+
+
+  
+  
+
+
+  <script type="text/javascript" src="/js/src/affix.js?v=5.1.4"></script>
+
+  <script type="text/javascript" src="/js/src/schemes/pisces.js?v=5.1.4"></script>
+
+
+
+  
+  <script type="text/javascript" src="/js/src/scrollspy.js?v=5.1.4"></script>
+<script type="text/javascript" src="/js/src/post-details.js?v=5.1.4"></script>
+
+
+
+  
+
+
+  <script type="text/javascript" src="/js/src/bootstrap.js?v=5.1.4"></script>
+
+
+
+  
+
+
+  
+
+
+
+
+	
+
+
+
+
+
+  
+
+
+
+
+
+  
+
+
+
+
+
+
+
+
+
+
+
+
+  
+
+
+
+
+
+  
+
+  
+
+  
+
+  
+  
+
+  
+  
+    <script type="text/x-mathjax-config">
+      MathJax.Hub.Config({
+        tex2jax: {
+          inlineMath: [ ['$','$'], ["\\(","\\)"]  ],
+          processEscapes: true,
+          skipTags: ['script', 'noscript', 'style', 'textarea', 'pre', 'code']
+        }
+      });
+    </script>
+
+    <script type="text/x-mathjax-config">
+      MathJax.Hub.Queue(function() {
+        var all = MathJax.Hub.getAllJax(), i;
+        for (i=0; i < all.length; i += 1) {
+          all[i].SourceElement().parentNode.className += ' has-jax';
+        }
+      });
+    </script>
+    <script type="text/javascript" src="//cdnjs.cloudflare.com/ajax/libs/mathjax/2.7.1/MathJax.js?config=TeX-AMS-MML_HTMLorMML"></script>
+  
+
+
+  
+
+  
+
+  
+
+<script type="text/javascript"
+color="255,128,255" opacity='0.7' zIndex="-2" count="99" src="//cdn.bootcss.com/canvas-nest.js/1.0.0/canvas-nest.min.js"></script><!-- hexo-inject:begin --><!-- Begin: Injected MathJax -->
+<script type="text/x-mathjax-config">
+  MathJax.Hub.Config({"tex2jax":{"inlineMath":[["$","$"],["\\(","\\)"]],"skipTags":["script","noscript","style","textarea","pre","code"],"processEscapes":true},"TeX":{"equationNumbers":{"autoNumber":"AMS"}}});
+</script>
+
+<script type="text/x-mathjax-config">
+  MathJax.Hub.Queue(function() {
+    var all = MathJax.Hub.getAllJax(), i;
+    for(i=0; i < all.length; i += 1) {
+      all[i].SourceElement().parentNode.className += ' has-jax';
+    }
+  });
+</script>
+
+<script type="text/javascript" src="https://cdnjs.cloudflare.com/ajax/libs/mathjax/2.7.1/MathJax.js">
+</script>
+<!-- End: Injected MathJax -->
+<!-- hexo-inject:end -->
+
+  
+</body>
+</html>
