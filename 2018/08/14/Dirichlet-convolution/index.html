@@ -68,7 +68,7 @@
 
 
 
-  <meta name="keywords" content="学习笔记" />
+  <meta name="keywords" content="数论," />
 
 
 
@@ -79,13 +79,18 @@
 
 
 
-<meta property="og:type" content="website">
-<meta property="og:title" content="Hanano&#39;s Blog">
-<meta property="og:url" content="http://yoursite.com/page/2/index.html">
+<meta name="description" content="注：阅读本文需要一定的基础数论或抽象代数知识   先给出一堆名词定义和解释    数论函数(算术函数)： 函数$f$被称为数论函数，如果它的定义域为正整数，值域为复数，比较常见的有欧拉函数$\varphi$和莫比乌斯函数$\mu$   环： 如果集合$R$与二元运算$+,\cdot$，且$R$中的任意两个元素在+运算下是一个阿贝尔群(可交换群)，在$\cdot$下是一个幺半群 那么$(R,+,\c">
+<meta name="keywords" content="数论">
+<meta property="og:type" content="article">
+<meta property="og:title" content="狄利克雷卷积">
+<meta property="og:url" content="http://yoursite.com/2018/08/14/Dirichlet-convolution/index.html">
 <meta property="og:site_name" content="Hanano&#39;s Blog">
+<meta property="og:description" content="注：阅读本文需要一定的基础数论或抽象代数知识   先给出一堆名词定义和解释    数论函数(算术函数)： 函数$f$被称为数论函数，如果它的定义域为正整数，值域为复数，比较常见的有欧拉函数$\varphi$和莫比乌斯函数$\mu$   环： 如果集合$R$与二元运算$+,\cdot$，且$R$中的任意两个元素在+运算下是一个阿贝尔群(可交换群)，在$\cdot$下是一个幺半群 那么$(R,+,\c">
 <meta property="og:locale" content="zh-Hans">
+<meta property="og:updated_time" content="2018-08-14T09:21:46.000Z">
 <meta name="twitter:card" content="summary">
-<meta name="twitter:title" content="Hanano&#39;s Blog">
+<meta name="twitter:title" content="狄利克雷卷积">
+<meta name="twitter:description" content="注：阅读本文需要一定的基础数论或抽象代数知识   先给出一堆名词定义和解释    数论函数(算术函数)： 函数$f$被称为数论函数，如果它的定义域为正整数，值域为复数，比较常见的有欧拉函数$\varphi$和莫比乌斯函数$\mu$   环： 如果集合$R$与二元运算$+,\cdot$，且$R$中的任意两个元素在+运算下是一个阿贝尔群(可交换群)，在$\cdot$下是一个幺半群 那么$(R,+,\c">
 
 
 
@@ -115,13 +120,13 @@
 
 
 
-  <link rel="canonical" href="http://yoursite.com/page/2/"/>
+  <link rel="canonical" href="http://yoursite.com/2018/08/14/Dirichlet-convolution/"/>
 
 
 
 
 
-  <title>Hanano's Blog</title><!-- hexo-inject:begin --><!-- hexo-inject:end -->
+  <title>狄利克雷卷积 | Hanano's Blog</title><!-- hexo-inject:begin --><!-- hexo-inject:end -->
   
 
 
@@ -140,8 +145,7 @@
     
   
 
-  <!-- hexo-inject:begin --><!-- hexo-inject:end --><div class="container sidebar-position-right 
-  page-home">
+  <!-- hexo-inject:begin --><!-- hexo-inject:end --><div class="container sidebar-position-right page-post-detail">
     <div class="headband"></div>
 
     <header id="header" class="header" itemscope itemtype="http://schema.org/WPHeader">
@@ -234,9 +238,9 @@
         <div class="content-wrap">
           <div id="content" class="content">
             
-  <section id="posts" class="posts-expand">
+
+  <div id="posts" class="posts-expand">
     
-      
 
   
 
@@ -249,7 +253,7 @@
   
   
   <div class="post-block">
-    <link itemprop="mainEntityOfPage" href="http://yoursite.com/2018/02/05/UVA5070/">
+    <link itemprop="mainEntityOfPage" href="http://yoursite.com/2018/08/14/Dirichlet-convolution/">
 
     <span hidden itemprop="author" itemscope itemtype="http://schema.org/Person">
       <meta itemprop="name" content="Hanano_Yuuki">
@@ -266,9 +270,7 @@
 
         
         
-          <h1 class="post-title" itemprop="name headline">
-                
-                <a class="post-title-link" href="/2018/02/05/UVA5070/" itemprop="url">UVA5070</a></h1>
+          <h1 class="post-title" itemprop="name headline">狄利克雷卷积</h1>
         
 
         <div class="post-meta">
@@ -280,8 +282,8 @@
               
                 <span class="post-meta-item-text">发表于</span>
               
-              <time title="创建于" itemprop="dateCreated datePublished" datetime="2018-02-05T00:21:45+08:00">
-                2018-02-05
+              <time title="创建于" itemprop="dateCreated datePublished" datetime="2018-08-14T15:01:24+08:00">
+                2018-08-14
               </time>
             
 
@@ -303,8 +305,8 @@
               
               
                 <span itemprop="about" itemscope itemtype="http://schema.org/Thing">
-                  <a href="/categories/题解/" itemprop="url" rel="index">
-                    <span itemprop="name">题解</span>
+                  <a href="/categories/数学/" itemprop="url" rel="index">
+                    <span itemprop="name">数学</span>
                   </a>
                 </span>
 
@@ -340,18 +342,59 @@
       
 
       
-        
-          
-          
-          ...
-          <!--noindex-->
-          <div class="post-button text-center">
-            <a class="btn" href="/2018/02/05/UVA5070/#more" rel="contents">
-              阅读全文 &raquo;
-            </a>
-          </div>
-          <!--/noindex-->
-        
+        <p>注：阅读本文需要一定的基础数论或抽象代数知识  </p>
+<p>先给出一堆名词定义和解释  </p>
+<ol>
+<li>数论函数(算术函数)：<br> 函数$f$被称为数论函数，如果它的定义域为正整数，值域为复数，比较常见的有欧拉函数$\varphi$和莫比乌斯函数$\mu$  </li>
+<li>环：<br> 如果集合$R$与二元运算$+,\cdot$，且$R$中的任意两个元素在+运算下是一个阿贝尔群(可交换群)，在$\cdot$下是一个幺半群 那么$(R,+,\cdot)$是一个环 特别的 如果元素对于$\cdot$运算可交换 那么这是一个交换环  </li>
+<li>幺半群：<br> $(M,\cdot)$是幺半群 如果$(M,\cdot)$符合以下公理：<br> 满足元素结合律 即$\forall a,b,c \in (M,\cdot)$有$(a\cdot b)\cdot c=a\cdot(b\cdot c)$<br> 存在单位元 即$\exists e\in (M,\cdot)$    $s.t.$ $a\cdot e=e\cdot a=a$<br> 满足运算封闭性 即$\forall a,b \in (M,\cdot)$有$a\cdot b \in (M,\cdot)$  </li>
+</ol>
+<h2 id="狄利克雷卷积的引出"><a href="#狄利克雷卷积的引出" class="headerlink" title="狄利克雷卷积的引出"></a>狄利克雷卷积的引出</h2><p>为了使数论函数之间的运算具有类似与整环的性质（方便研究）<br>对于数论函数$f,g$的加法 显然$f+g=g+f$<br>而对于乘法，我们不能简单的将两个数论函数相乘 而引入狄利克雷卷积 记作$\cdot$<br>$f\cdot g(n)=\sum_{d|n}{f(d)g(\frac{n}{d})}$<br>我们来证明一下$(数论函数,+,\cdot)$是一个可交换环<br>记$C=$数论函数集<br>$\forall f,g,u \in C$   </p>
+<p>首先$f+g=g+f$<br>说明加法可交换  </p>
+  
+$f\cdot g(n)=\sum_{d|n}{f(d)g(\frac{n}{d})} \cdots(1)$  
+  
+  
+$g\cdot f(n)=\sum_{d|n}{g(d)f(\frac{n}{d})} \cdots(2)$  
+  
+<p>对$(2)$做换元$k=\frac{n}{d}$则<br>  
+$g\cdot f(n)=\sum_{\frac{n}{k}|n}{g(\frac{n}{d})f(n)}$  
+<br>由于$\frac{n}{k}$也是$n$的因子 那么换一种写法就是<br>  
+$g\cdot f(n)=\sum_{k|n}{g(\frac{n}{d})f(n)}$   
+<br>显然有$f\cdot g(n)=g\cdot f(n)$<br>说明乘法可交换</p>
+<p>指出单位元$e(n)=[n=1]$<br>由于乘法可交换 所以这里只需证明 $f\cdot e=f$<br>$f\cdot e(n)=\sum_{d|n}{f(d)e(\frac{n}{d})}$<br>注意到这里的$e(\frac{n}{d})$只有当$d=n$的时候才为1 其余都为0<br>那么$f\cdot e(n)=f(n)e(1)=f(n)$<br>所以单位元存在  </p>
+  
+$(f\cdot g)\cdot u(n)  \\
+=\sum_{ld=n}{(f\cdot g)(l)u(d)} \\
+=\sum_{ld=n}{(\sum_{ij=l}{f(i)g(j)})u(d)}  \\
+=\sum_{ijd=n}{f(i)g(j)u(d)}  \\$  
+ 
+$f\cdot(g\cdot u)(n) \\
+=\sum_{il=n}{f(i)(g\cdot u)(l)} \\
+=\sum_{il=n}{f(i)\sum_{jd=l}{g(j)u(d)}} \\
+=\sum_{ijd=n}{f(i)g(j)u(d)}  \\$  
+   
+<p>即$(f\cdot g)\cdot u(n)=f\cdot(g\cdot u)(n)$<br>故结合律成立  </p>
+<p>由于复数域内乘法满足封闭性 那么 $f\cdot g \in C$也成立<br>因此<br>$(C,\cdot)$是一个幺半群<br>$(C,+,\cdot)$是个环 而且还是个交换环  </p>
+<h2 id="数论函数与狄利克雷卷积"><a href="#数论函数与狄利克雷卷积" class="headerlink" title="数论函数与狄利克雷卷积"></a>数论函数与狄利克雷卷积</h2><p>我们不加证明的给出一些恒等式（因为重点不在这里（雾））  </p>
+<ol>
+<li>$1\cdot\mu=e$ 其中$1(n)=1$  </li>
+<li>由1.可以得到 $g=f\cdot 1$ iff $f=g\cdot \mu$即大名鼎鼎的莫比乌斯反演公式  </li>
+<li>$\lambda\cdot |\mu| =e$ 其中$\lambda$是刘维尔函数  </li>
+<li>$d=1\cdot 1$ 其中d(n)为n的因数个数<br>……….还有很多以后再补  </li>
+</ol>
+<h2 id="莫比乌斯反演"><a href="#莫比乌斯反演" class="headerlink" title="莫比乌斯反演"></a>莫比乌斯反演</h2><p>$f=g\cdot \mu$ 当且仅当  $g=f\cdot 1$<br>$f,g$都是一般的数论函数  </p>
+<h3 id="莫比乌斯函数"><a href="#莫比乌斯函数" class="headerlink" title="莫比乌斯函数"></a>莫比乌斯函数</h3><h4 id="定义"><a href="#定义" class="headerlink" title="定义"></a>定义</h4><p>$\mu$是莫比乌斯函数 他是这么定义的  </p>
+<p>$\mu(1)=1$<br>设$n=p_1^{k_1}\cdot p_2^{k_2}\cdots p_m^{k_m}$<br>如果$\prod_{i=1}^m{k_i}=1$则$\mu(n)=(-1)^m$<br>否则$\mu(n)=0$  </p>
+<p>通俗一点说就是 有平方因子的数的莫比乌斯函数值为0  </p>
+<h4 id="性质"><a href="#性质" class="headerlink" title="性质"></a>性质</h4><ol>
+<li>莫比乌斯函数是积性函数<br> $\mu(a\cdot b)=\mu(a)\cdot \mu(b),gcd(a,b)=1$注意这里的乘法是数量乘法不是卷积  </li>
+<li>$\sum_{d|n}{\mu(d)=[n=1]}$<br> 这个就是上面提过的$1\cdot\mu=e$   </li>
+</ol>
+<h4 id="公式"><a href="#公式" class="headerlink" title="公式"></a>公式</h4><p>如果数论函数$f,g$满足$f(n)=\sum_{d|n}{g(d)}$<br>那么有 $g(n)=\sum_{d|n}{\mu(d)f(\frac{n}{d})}=\sum_{d|n}{\mu(\frac{n}{d})f(d)}$<br>或者可以这么写<br>$f(i)=\sum_{d=1}^{\lfloor\frac{n}{i}\rfloor}{g(d\cdot i)}\Rightarrow g(i)=\sum_{d=1}^{\lfloor\frac{n}{i}\rfloor}{f(d\cdot i)\mu(d)}$枚举了n的因数   </p>
+<h4 id="应用"><a href="#应用" class="headerlink" title="应用"></a>应用</h4><p>关于莫比乌斯反演的应用 由于涉及篇幅较长 将重开一篇文章介绍  </p>
+<h2 id="结"><a href="#结" class="headerlink" title="结"></a>结</h2><p>本文为莫比乌斯反演做基础知识的铺垫（持续更新中…）  </p>
+
       
     </div>
     
@@ -366,310 +409,36 @@
 
     <footer class="post-footer">
       
-
-      
-
-      
-
-      
-      
-        <div class="post-eof"></div>
-      
-    </footer>
-  </div>
-  
-  
-  
-  </article>
-
-
-    
-      
-
-  
-
-  
-  
-  
-
-  <article class="post post-type-normal" itemscope itemtype="http://schema.org/Article">
-  
-  
-  
-  <div class="post-block">
-    <link itemprop="mainEntityOfPage" href="http://yoursite.com/2018/02/04/汇编指令速查/">
-
-    <span hidden itemprop="author" itemscope itemtype="http://schema.org/Person">
-      <meta itemprop="name" content="Hanano_Yuuki">
-      <meta itemprop="description" content="">
-      <meta itemprop="image" content="/images/avatar.gif">
-    </span>
-
-    <span hidden itemprop="publisher" itemscope itemtype="http://schema.org/Organization">
-      <meta itemprop="name" content="Hanano's Blog">
-    </span>
-
-    
-      <header class="post-header">
-
-        
-        
-          <h1 class="post-title" itemprop="name headline">
-                
-                <a class="post-title-link" href="/2018/02/04/汇编指令速查/" itemprop="url">汇编指令速查表</a></h1>
-        
-
-        <div class="post-meta">
-          <span class="post-time">
-            
-              <span class="post-meta-item-icon">
-                <i class="fa fa-calendar-o"></i>
-              </span>
-              
-                <span class="post-meta-item-text">发表于</span>
-              
-              <time title="创建于" itemprop="dateCreated datePublished" datetime="2018-02-04T01:08:08+08:00">
-                2018-02-04
-              </time>
-            
-
-            
-
-            
-          </span>
-
+        <div class="post-tags">
           
-            <span class="post-category" >
-            
-              <span class="post-meta-divider">|</span>
-            
-              <span class="post-meta-item-icon">
-                <i class="fa fa-folder-o"></i>
-              </span>
-              
-                <span class="post-meta-item-text">分类于</span>
-              
-              
-                <span itemprop="about" itemscope itemtype="http://schema.org/Thing">
-                  <a href="/categories/杂/" itemprop="url" rel="index">
-                    <span itemprop="name">杂</span>
-                  </a>
-                </span>
-
-                
-                
-              
-            </span>
+            <a href="/tags/数论/" rel="tag"># 数论</a>
           
-
-          
-            
-          
-
-          
-          
-
-          
-
-          
-
-          
-
         </div>
-      </header>
-    
+      
 
-    
-    
-    
-    <div class="post-body" itemprop="articleBody">
-
+      
       
       
 
       
-        
-          
-          
-          ...
-          <!--noindex-->
-          <div class="post-button text-center">
-            <a class="btn" href="/2018/02/04/汇编指令速查/#more" rel="contents">
-              阅读全文 &raquo;
-            </a>
+        <div class="post-nav">
+          <div class="post-nav-next post-nav-item">
+            
+              <a href="/2018/07/28/LCA/" rel="next" title="二进制分组与LCA">
+                <i class="fa fa-chevron-left"></i> 二进制分组与LCA
+              </a>
+            
           </div>
-          <!--/noindex-->
-        
-      
-    </div>
-    
-    
-    
 
-    
+          <span class="post-nav-divider"></span>
 
-    
-
-    
-
-    <footer class="post-footer">
-      
-
-      
-
-      
-
-      
-      
-        <div class="post-eof"></div>
-      
-    </footer>
-  </div>
-  
-  
-  
-  </article>
-
-
-    
-      
-
-  
-
-  
-  
-  
-
-  <article class="post post-type-normal" itemscope itemtype="http://schema.org/Article">
-  
-  
-  
-  <div class="post-block">
-    <link itemprop="mainEntityOfPage" href="http://yoursite.com/2018/02/04/data-struct-union_find_set/">
-
-    <span hidden itemprop="author" itemscope itemtype="http://schema.org/Person">
-      <meta itemprop="name" content="Hanano_Yuuki">
-      <meta itemprop="description" content="">
-      <meta itemprop="image" content="/images/avatar.gif">
-    </span>
-
-    <span hidden itemprop="publisher" itemscope itemtype="http://schema.org/Organization">
-      <meta itemprop="name" content="Hanano's Blog">
-    </span>
-
-    
-      <header class="post-header">
-
-        
-        
-          <h1 class="post-title" itemprop="name headline">
-                
-                <a class="post-title-link" href="/2018/02/04/data-struct-union_find_set/" itemprop="url">并查集介绍</a></h1>
-        
-
-        <div class="post-meta">
-          <span class="post-time">
+          <div class="post-nav-prev post-nav-item">
             
-              <span class="post-meta-item-icon">
-                <i class="fa fa-calendar-o"></i>
-              </span>
-              
-                <span class="post-meta-item-text">发表于</span>
-              
-              <time title="创建于" itemprop="dateCreated datePublished" datetime="2018-02-04T00:52:40+08:00">
-                2018-02-04
-              </time>
-            
-
-            
-
-            
-          </span>
-
-          
-            <span class="post-category" >
-            
-              <span class="post-meta-divider">|</span>
-            
-              <span class="post-meta-item-icon">
-                <i class="fa fa-folder-o"></i>
-              </span>
-              
-                <span class="post-meta-item-text">分类于</span>
-              
-              
-                <span itemprop="about" itemscope itemtype="http://schema.org/Thing">
-                  <a href="/categories/数据结构/" itemprop="url" rel="index">
-                    <span itemprop="name">数据结构</span>
-                  </a>
-                </span>
-
-                
-                
-              
-            </span>
-          
-
-          
-            
-          
-
-          
-          
-
-          
-
-          
-
-          
-
+          </div>
         </div>
-      </header>
-    
-
-    
-    
-    
-    <div class="post-body" itemprop="articleBody">
-
-      
       
 
       
-        
-          
-          
-          ...
-          <!--noindex-->
-          <div class="post-button text-center">
-            <a class="btn" href="/2018/02/04/data-struct-union_find_set/#more" rel="contents">
-              阅读全文 &raquo;
-            </a>
-          </div>
-          <!--/noindex-->
-        
-      
-    </div>
-    
-    
-    
-
-    
-
-    
-
-    
-
-    <footer class="post-footer">
-      
-
-      
-
-      
-
-      
-      
-        <div class="post-eof"></div>
       
     </footer>
   </div>
@@ -679,14 +448,11 @@
   </article>
 
 
-    
-  </section>
 
-  
-  <nav class="pagination">
-    <a class="extend prev" rel="prev" href="/"><i class="fa fa-angle-left"></i></a><a class="page-number" href="/">1</a><span class="page-number current">2</span>
-  </nav>
-
+    <div class="post-spread">
+      
+    </div>
+  </div>
 
 
           </div>
@@ -694,6 +460,10 @@
 
 
           
+
+  
+
+
 
         </div>
         
@@ -714,8 +484,17 @@
       
 
       
+        <ul class="sidebar-nav motion-element">
+          <li class="sidebar-nav-toc sidebar-nav-active" data-target="post-toc-wrap">
+            文章目录
+          </li>
+          <li class="sidebar-nav-overview" data-target="site-overview-wrap">
+            站点概览
+          </li>
+        </ul>
+      
 
-      <section class="site-overview-wrap sidebar-panel sidebar-panel-active">
+      <section class="site-overview-wrap sidebar-panel">
         <div class="site-overview">
           <div class="site-author motion-element" itemprop="author" itemscope itemtype="http://schema.org/Person">
             
@@ -775,6 +554,22 @@
         </div>
       </section>
 
+      
+      <!--noindex-->
+        <section class="post-toc-wrap motion-element sidebar-panel sidebar-panel-active">
+          <div class="post-toc">
+
+            
+              
+            
+
+            
+              <div class="post-toc-content"><ol class="nav"><li class="nav-item nav-level-2"><a class="nav-link" href="#狄利克雷卷积的引出"><span class="nav-number">1.</span> <span class="nav-text">狄利克雷卷积的引出</span></a></li><li class="nav-item nav-level-2"><a class="nav-link" href="#数论函数与狄利克雷卷积"><span class="nav-number">2.</span> <span class="nav-text">数论函数与狄利克雷卷积</span></a></li><li class="nav-item nav-level-2"><a class="nav-link" href="#莫比乌斯反演"><span class="nav-number">3.</span> <span class="nav-text">莫比乌斯反演</span></a><ol class="nav-child"><li class="nav-item nav-level-3"><a class="nav-link" href="#莫比乌斯函数"><span class="nav-number">3.1.</span> <span class="nav-text">莫比乌斯函数</span></a><ol class="nav-child"><li class="nav-item nav-level-4"><a class="nav-link" href="#定义"><span class="nav-number">3.1.1.</span> <span class="nav-text">定义</span></a></li><li class="nav-item nav-level-4"><a class="nav-link" href="#性质"><span class="nav-number">3.1.2.</span> <span class="nav-text">性质</span></a></li><li class="nav-item nav-level-4"><a class="nav-link" href="#公式"><span class="nav-number">3.1.3.</span> <span class="nav-text">公式</span></a></li><li class="nav-item nav-level-4"><a class="nav-link" href="#应用"><span class="nav-number">3.1.4.</span> <span class="nav-text">应用</span></a></li></ol></li></ol></li><li class="nav-item nav-level-2"><a class="nav-link" href="#结"><span class="nav-number">4.</span> <span class="nav-text">结</span></a></li></ol></div>
+            
+
+          </div>
+        </section>
+      <!--/noindex-->
       
 
       
@@ -922,6 +717,10 @@
 
 
   
+  <script type="text/javascript" src="/js/src/scrollspy.js?v=5.1.4"></script>
+<script type="text/javascript" src="/js/src/post-details.js?v=5.1.4"></script>
+
+
 
   
 
