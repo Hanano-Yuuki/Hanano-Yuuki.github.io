@@ -68,7 +68,7 @@
 
 
 
-  <meta name="keywords" content="Mo's algorithm," />
+  <meta name="keywords" content="HDOJ," />
 
 
 
@@ -79,18 +79,18 @@
 
 
 
-<meta name="description" content="本文介绍莫队算法  引例现给你一排n个方格，每个方格都有不同的颜色，颜色用1~k进行标号，有两种操作共m个询问：    询问从l~r之间有多少不同颜色的方格 把x位置的方格改成y颜色    问题分析首先我们考虑暴力算法修改颜色操作是O(1)的而对于每一对给出的l和r，从l~r扫描一遍方格，很容易统计出这个区间内有多少不同颜色，这样的复杂度是O(n)，一共有m个询问，那么总共的复杂度是O(n·m)">
-<meta name="keywords" content="Mo&#39;s algorithm">
+<meta name="description" content="题目在此HDOJ6397   题意抽象出来：求满足$\sum_{i=1}^m{a_i}=k$且$a_i\in[0,n-1] \cap N$的方案个数 (1,1,2)和(1,2,1)算一种方案 以此类推   分析这题是2018多校第一题 明显题解讲的东西不是现场能想出来的 回忆下整数分拆问题 和这题有点类似 可以采用隔板法或生成函数的做法 那我们这里来推一下生成函数的做法   公式推理通过生成函数的">
+<meta name="keywords" content="HDOJ">
 <meta property="og:type" content="article">
-<meta property="og:title" content="莫队算法">
-<meta property="og:url" content="http://yoursite.com/2018/05/06/Mo's-algorithm/index.html">
+<meta property="og:title" content="HDOJ6397">
+<meta property="og:url" content="http://yoursite.com/2018/08/16/HDOJ6397/index.html">
 <meta property="og:site_name" content="Hanano&#39;s Blog">
-<meta property="og:description" content="本文介绍莫队算法  引例现给你一排n个方格，每个方格都有不同的颜色，颜色用1~k进行标号，有两种操作共m个询问：    询问从l~r之间有多少不同颜色的方格 把x位置的方格改成y颜色    问题分析首先我们考虑暴力算法修改颜色操作是O(1)的而对于每一对给出的l和r，从l~r扫描一遍方格，很容易统计出这个区间内有多少不同颜色，这样的复杂度是O(n)，一共有m个询问，那么总共的复杂度是O(n·m)">
+<meta property="og:description" content="题目在此HDOJ6397   题意抽象出来：求满足$\sum_{i=1}^m{a_i}=k$且$a_i\in[0,n-1] \cap N$的方案个数 (1,1,2)和(1,2,1)算一种方案 以此类推   分析这题是2018多校第一题 明显题解讲的东西不是现场能想出来的 回忆下整数分拆问题 和这题有点类似 可以采用隔板法或生成函数的做法 那我们这里来推一下生成函数的做法   公式推理通过生成函数的">
 <meta property="og:locale" content="zh-Hans">
-<meta property="og:updated_time" content="2018-05-19T03:30:32.000Z">
+<meta property="og:updated_time" content="2018-08-16T10:23:00.000Z">
 <meta name="twitter:card" content="summary">
-<meta name="twitter:title" content="莫队算法">
-<meta name="twitter:description" content="本文介绍莫队算法  引例现给你一排n个方格，每个方格都有不同的颜色，颜色用1~k进行标号，有两种操作共m个询问：    询问从l~r之间有多少不同颜色的方格 把x位置的方格改成y颜色    问题分析首先我们考虑暴力算法修改颜色操作是O(1)的而对于每一对给出的l和r，从l~r扫描一遍方格，很容易统计出这个区间内有多少不同颜色，这样的复杂度是O(n)，一共有m个询问，那么总共的复杂度是O(n·m)">
+<meta name="twitter:title" content="HDOJ6397">
+<meta name="twitter:description" content="题目在此HDOJ6397   题意抽象出来：求满足$\sum_{i=1}^m{a_i}=k$且$a_i\in[0,n-1] \cap N$的方案个数 (1,1,2)和(1,2,1)算一种方案 以此类推   分析这题是2018多校第一题 明显题解讲的东西不是现场能想出来的 回忆下整数分拆问题 和这题有点类似 可以采用隔板法或生成函数的做法 那我们这里来推一下生成函数的做法   公式推理通过生成函数的">
 
 
 
@@ -120,13 +120,13 @@
 
 
 
-  <link rel="canonical" href="http://yoursite.com/2018/05/06/Mo's-algorithm/"/>
+  <link rel="canonical" href="http://yoursite.com/2018/08/16/HDOJ6397/"/>
 
 
 
 
 
-  <title>莫队算法 | Hanano's Blog</title><!-- hexo-inject:begin --><!-- hexo-inject:end -->
+  <title>HDOJ6397 | Hanano's Blog</title><!-- hexo-inject:begin --><!-- hexo-inject:end -->
   
 
 
@@ -253,7 +253,7 @@
   
   
   <div class="post-block">
-    <link itemprop="mainEntityOfPage" href="http://yoursite.com/2018/05/06/Mo's-algorithm/">
+    <link itemprop="mainEntityOfPage" href="http://yoursite.com/2018/08/16/HDOJ6397/">
 
     <span hidden itemprop="author" itemscope itemtype="http://schema.org/Person">
       <meta itemprop="name" content="Hanano_Yuuki">
@@ -270,7 +270,7 @@
 
         
         
-          <h1 class="post-title" itemprop="name headline">莫队算法</h1>
+          <h1 class="post-title" itemprop="name headline">HDOJ6397</h1>
         
 
         <div class="post-meta">
@@ -282,8 +282,8 @@
               
                 <span class="post-meta-item-text">发表于</span>
               
-              <time title="创建于" itemprop="dateCreated datePublished" datetime="2018-05-06T20:28:44+08:00">
-                2018-05-06
+              <time title="创建于" itemprop="dateCreated datePublished" datetime="2018-08-16T16:16:25+08:00">
+                2018-08-16
               </time>
             
 
@@ -305,8 +305,8 @@
               
               
                 <span itemprop="about" itemscope itemtype="http://schema.org/Thing">
-                  <a href="/categories/算法/" itemprop="url" rel="index">
-                    <span itemprop="name">算法</span>
+                  <a href="/categories/题解/" itemprop="url" rel="index">
+                    <span itemprop="name">题解</span>
                   </a>
                 </span>
 
@@ -342,36 +342,20 @@
       
 
       
-        <blockquote>
-<p>本文介绍莫队算法</p>
-</blockquote>
-<h2 id="引例"><a href="#引例" class="headerlink" title="引例"></a>引例</h2><p>现给你一排n个方格，每个方格都有不同的颜色，颜色用1~k进行标号，有两种操作共m个询问：  </p>
-<ol>
-<li>询问从l~r之间有多少不同颜色的方格</li>
-<li>把x位置的方格改成y颜色  </li>
-</ol>
-<h2 id="问题分析"><a href="#问题分析" class="headerlink" title="问题分析"></a>问题分析</h2><p>首先我们考虑暴力算法<br>修改颜色操作是O(1)的<br>而对于每一对给出的l和r，从l~r扫描一遍方格，很容易统计出这个区间内有多少不同颜色，这样的复杂度是O(n)，一共有m个询问，那么总共的复杂度是O(n·m)<br>但对于较大的数据规模，O(n·m)带来的将会是TLE<br>于是我们需要寻找一种更加高效的算法<br>考虑线段树做法<br>每个线段树节点维护$l_i$~$r_i$的存在颜色数(可以压位做到)，查询区间时采用&amp;运算，更新点时可以应用lazy标记<br>首先线段树的空间要求很大，在n很大的时候，节点数是很多的，在k很大的时候long long/int64可能满足不了需求(可以用bitset)<br>线段树做法也有局限性<br>比较而言，暴力做法的空间要求较小，能否找到一个优化方法使得复杂度降低到可以忍受的程度呢？</p>
-<h2 id="莫队算法"><a href="#莫队算法" class="headerlink" title="莫队算法"></a>莫队算法</h2><p>莫队算法应运而生<br>莫队算法是在暴力算法的基础上优化了询问顺序<br>它本质上也是一个暴力算法  </p>
-<h3 id="更简单的问题"><a href="#更简单的问题" class="headerlink" title="更简单的问题"></a>更简单的问题</h3><p>先考虑之前的问题，如果只有第一种操作(询问l~r颜色数)，应该怎么做<br>（打表预处理就算了，虽然是静态的数据，不过我猜会爆内存）  </p>
-<h4 id="分析性质"><a href="#分析性质" class="headerlink" title="分析性质"></a>分析性质</h4><p>假如我已经知道[l,r]的答案，那么我可以很快通过转移得到[l,r+1],[l,r-1],[l+1,r],[l-1,r]的答案，这是O(1)的  </p>
-<h4 id="实现"><a href="#实现" class="headerlink" title="实现"></a>实现</h4><p>用一个int数组cnt计数维护当前[l,r]范围内各个颜色的数量<br>当转移到[l,r+1]的时候，假设r+1位的颜色是color[r+1]，那么当cnt[color[r+1]]==0，说明原来是没有这个颜色的，转移答案+1，最后更新cnt数组，cnt[color[r+1]]++<br>当转移到[l,r-1]的时候，假设r位的颜色是color[r]，那么当cnt[color[r]]==1，说明r位的颜色是区间内为color[r]颜色的最后一个方块，转移答案-1，更新cnt数组，cnt[color[r]]- -<br>转移到另外两个区间同理  </p>
-<h4 id="复杂度"><a href="#复杂度" class="headerlink" title="复杂度"></a>复杂度</h4><p>显然，这样的操作：  </p>
-<ol>
-<li>读一个询问</li>
-<li>转移答案</li>
-<li>输出</li>
-<li>循环  </li>
-</ol>
-<p>复杂度是O(n·m)的<br>但是考虑到每次询问之间互不影响，那么修改询问顺序也是没有问题的<br>[$l_i$,$r_i$]-&gt;[$l_j$,$r_j$]的代价是$|l_i-l_j|+|r_i-r_j|$<br>以$\lfloor\frac{L}{S}\rfloor$为第一关键字，$R$为第二关键字对询问区间进行从小到大排序(S为分块块长)<br>对于每一个询问中的每一个块，横坐标最多变化S，纵坐标最多变化n，所以块与块之间转移复杂度是O(n),总共复杂度是O($\frac{n^2}{S}+mS+\frac{n^2}{S}$)<br>为了让复杂度最优<br>对S做偏导<br>$\partial_S{(\frac{n^2}{S}+mS+\frac{n^2}{S})}=m-\frac{2n^2}{S^2}=0$<br>解得<br>$S=n\cdot\sqrt[]{\frac{2}{m}}$<br>此时的复杂度是最小的，为O($n\cdot\sqrt[]{2m}$) (其实有个$\sqrt2$的常数)<br>这就是莫队真正work的地方，仅仅修改了询问顺序，就达到了降低复杂度的目标,但也使得它仅仅适合解决<strong>离线查找询问问题</strong>  </p>
-<h3 id="更深层次的问题"><a href="#更深层次的问题" class="headerlink" title="更深层次的问题"></a>更深层次的问题</h3><p>我们解决了只有查询的问题，开篇的问题还有修改的操作<br>这个时候就需要修改一下莫队算法，使得它适合解决这一类问题  </p>
-<h4 id="裸莫队算法的缺陷"><a href="#裸莫队算法的缺陷" class="headerlink" title="裸莫队算法的缺陷"></a>裸莫队算法的缺陷</h4><p>刚才我们提到，莫队算法是通过修改询问顺序来降低复杂度的，如果有修改原数据的操作，重排会有一些问题，比如，一部分询问必须排在一部分修改之后，一部分询问必须排在一部分修改之前，否则将会导致错误的询问答案  </p>
-<h4 id="解决方案"><a href="#解决方案" class="headerlink" title="解决方案"></a>解决方案</h4><p>但我们排还是要排的，不能不排，不然还是TLE，那么就考虑在修改操作上做手脚<br>既然询问和修改得有先后顺序，那么我在原来的询问基础上加一维时间维T，这样排完序以后就知道当前的询问是什么时候询问的，前面有哪些修改操作，其次，我们既要能修改原数据，也要能撤销修改<br>设分块块长为$S_1,S_2$,以$\lfloor\frac{L}{S_1}\rfloor$为第一关键字，$\lfloor\frac{R}{S_2}\rfloor$为第二关键字，$t$为第三关键字从小到大对询问排序(t表示本次询问之前有t次修改操作)  </p>
-<h4 id="复杂度-1"><a href="#复杂度-1" class="headerlink" title="复杂度"></a>复杂度</h4><p>同样的，相邻块之间的转移复杂度是O(n)，t最大变化m，L最多变化$S_1$，R最多变化$S_2$，总复杂度是$O(mS_1+mS_2+\frac{2n^2m}{S_1S_2})$<br>分别对$S_1$和$S_2$做偏导得  </p>
-<p>$$<br>\begin{equation}<br>\left\{<br>             \begin{array}{lr}<br>             m-\frac{2n^2m}{S_1^2S_2}=0, &amp; \\<br>             m-\frac{2n^2m}{S_1S_2^2}=0, &amp;<br>             \end{array}<br>\right.<br>\end{equation}<br>$$</p>
-<p>解得<br>$S_1=S_2=\sqrt[3]{2n^2}$<br>此时的复杂度最小 为$O(m\cdot\sqrt[3]{n^2})$  </p>
-<h3 id="总结"><a href="#总结" class="headerlink" title="总结"></a>总结</h3><p>莫队算法本质是一个暴力算法，它通过分块改变询问顺序来降低复杂度，适用于解决一类离线查找询问问题  </p>
-<h2 id="练习"><a href="#练习" class="headerlink" title="练习"></a>练习</h2><p><a href="https://www.lydsy.com/JudgeOnline/problem.php?id=1878" target="_blank" rel="noopener">BZOJ1878</a><br>也可以尝试用前文提到的线段树尝试一下(做法很多，树状数组，主席树也能过)<br><a href="https://www.lydsy.com/JudgeOnline/problem.php?id=2120" target="_blank" rel="noopener">BZOJ2120</a>    </p>
-
+        <p>题目在此<a href="http://acm.hdu.edu.cn/showproblem.php?pid=6397" target="_blank" rel="noopener">HDOJ6397</a>  </p>
+<h2 id="题意"><a href="#题意" class="headerlink" title="题意"></a>题意</h2><p>抽象出来：<br>求满足$\sum_{i=1}^m{a_i}=k$且$a_i\in[0,n-1] \cap N$的方案个数 (1,1,2)和(1,2,1)算一种方案 以此类推  </p>
+<h2 id="分析"><a href="#分析" class="headerlink" title="分析"></a>分析</h2><p>这题是2018多校第一题 明显题解讲的东西不是现场能想出来的 回忆下整数分拆问题 和这题有点类似 可以采用隔板法或生成函数的做法 那我们这里来推一下生成函数的做法  </p>
+<h2 id="公式推理"><a href="#公式推理" class="headerlink" title="公式推理"></a>公式推理</h2><p>通过生成函数的计算方式我们知道 多项式 $(1+x+x^2+\cdots+x^{n-1})^m$的$x^k$项的系数就是答案<br>然后我们化简一下这个多项式<br>
+$$
+\begin{align*} 
+& (1+x+x^2+\cdots+x^{n-1})^m \\
+& =(\frac{1-x^n}{1-x})^m \\
+& =(1-x^n)^m\cdot (1-x)^{-m} \\
+\end{align*} 
+$$  
+<br>好了到了这一步 得把它给展开<br>第一项就是正常的二项式展开 由于第二项的次数是负的 要泰勒展开（这里用的是泰勒展开 用广义牛顿二项式展开也能得到相同的结论） 那么上式即<br>$\sum_{i=0}^m{C_m^i}(-x^n)^i\cdot \sum_{i=0}^\infty{C_{m+i-1}^{i-1}x^i}$<br>要求$x^k$的系数 注意到第二项和函数是无穷级数 那么枚举第一项和函数中的项 答案是<br>$\sum_{i=0}^m{(-1)^iC_m^ix^{ni}\cdot C_{m+k-ni-1}^{ni-1}x^{k-ni}}$  <br>即<br>$\sum_{i=0}^m{(-1)^iC_m^i\cdot C_{m+k-ni-1}^{ni-1}x^{k}}$<br>要注意 $k-ni\ge 0$ 即 $i\le \frac{k}{n}$<br>所以得把求和上限改了<br>那么答案就是 $\sum_{i=0}^{\frac{k}{n}}{(-1)^iC_m^i\cdot C_{m+k-ni-1}^{ni-1}}$  </p>
+<h2 id="复杂度"><a href="#复杂度" class="headerlink" title="复杂度"></a>复杂度</h2><p>求和复杂度是$O(\frac{k}{n})$ 内部的组合数暴力转移复杂度是 $O(n)$ 所以一次询问的复杂度是$O(k)$  </p>
+<h2 id="代码"><a href="#代码" class="headerlink" title="代码"></a>代码</h2><figure class="highlight c++"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br><span class="line">16</span><br><span class="line">17</span><br><span class="line">18</span><br><span class="line">19</span><br><span class="line">20</span><br><span class="line">21</span><br><span class="line">22</span><br><span class="line">23</span><br><span class="line">24</span><br><span class="line">25</span><br><span class="line">26</span><br><span class="line">27</span><br><span class="line">28</span><br><span class="line">29</span><br><span class="line">30</span><br><span class="line">31</span><br><span class="line">32</span><br><span class="line">33</span><br><span class="line">34</span><br><span class="line">35</span><br><span class="line">36</span><br><span class="line">37</span><br><span class="line">38</span><br><span class="line">39</span><br><span class="line">40</span><br><span class="line">41</span><br><span class="line">42</span><br><span class="line">43</span><br><span class="line">44</span><br><span class="line">45</span><br></pre></td><td class="code"><pre><span class="line"><span class="meta">#<span class="meta-keyword">include</span><span class="meta-string">&lt;bits/stdc++.h&gt;</span></span></span><br><span class="line"></span><br><span class="line"><span class="keyword">typedef</span> <span class="keyword">long</span> <span class="keyword">long</span> ll;</span><br><span class="line"><span class="keyword">const</span> <span class="keyword">int</span> N = <span class="number">1e5</span> + <span class="number">10</span>;</span><br><span class="line"><span class="keyword">const</span> ll MOD = <span class="number">998244353</span>;</span><br><span class="line"></span><br><span class="line"><span class="keyword">using</span> <span class="keyword">namespace</span> <span class="built_in">std</span>;</span><br><span class="line"></span><br><span class="line">ll inv[N&lt;&lt;<span class="number">1</span>];</span><br><span class="line"></span><br><span class="line"><span class="comment">//这是线性处理逆元</span></span><br><span class="line"><span class="function"><span class="keyword">inline</span> <span class="keyword">void</span> <span class="title">init</span><span class="params">()</span></span>&#123;</span><br><span class="line">    inv[<span class="number">1</span>] = <span class="number">1</span>;</span><br><span class="line">    <span class="keyword">for</span> (<span class="keyword">int</span> i = <span class="number">2</span>; i &lt; (N&lt;&lt;<span class="number">1</span>); i++)</span><br><span class="line">        inv[i] = (MOD - MOD / i) * inv[MOD % i] % MOD;</span><br><span class="line">&#125;</span><br><span class="line"></span><br><span class="line"><span class="function"><span class="keyword">int</span> <span class="title">main</span><span class="params">()</span> </span>&#123;</span><br><span class="line">    <span class="keyword">int</span> t;</span><br><span class="line">    <span class="built_in">cin</span> &gt;&gt; t;</span><br><span class="line">    init();</span><br><span class="line">    <span class="keyword">while</span> (t--) &#123;</span><br><span class="line">        ll n, m, k;</span><br><span class="line">        <span class="built_in">cin</span> &gt;&gt; n &gt;&gt; m &gt;&gt; k;</span><br><span class="line">        ll ans = <span class="number">0</span>;</span><br><span class="line">        ll sig = <span class="number">1</span>;</span><br><span class="line">        ll cur1 = <span class="number">1</span>, cur2 = <span class="number">1</span>;</span><br><span class="line">        <span class="keyword">for</span> (<span class="keyword">int</span> i = <span class="number">0</span>; i &lt; m - <span class="number">1</span>; i++) &#123;</span><br><span class="line">            cur2 = cur2*(m + k - i - <span class="number">1</span>) % MOD*inv[i + <span class="number">1</span>] % MOD;</span><br><span class="line">        &#125;</span><br><span class="line">        <span class="keyword">for</span> (<span class="keyword">int</span> i = <span class="number">0</span>; i &lt;= k / n; i++) &#123;</span><br><span class="line">            ans += cur1*cur2%MOD*sig%MOD;</span><br><span class="line">            ans = (ans%MOD + MOD) % MOD;</span><br><span class="line">            sig = (sig == <span class="number">1</span> ? <span class="number">-1</span> : <span class="number">1</span>);</span><br><span class="line">            <span class="keyword">if</span> (i + <span class="number">1</span> &lt;= k / n) &#123;</span><br><span class="line">                cur1 = cur1*(m - i) % MOD*inv[i + <span class="number">1</span>] % MOD;</span><br><span class="line">                <span class="keyword">for</span> (<span class="keyword">int</span> j = m + k - n*i - <span class="number">1</span>; j &gt; m + k - n*(i + <span class="number">1</span>) - <span class="number">1</span>; j--) &#123;</span><br><span class="line">                    cur2 = cur2*(j - m + <span class="number">1</span>) % MOD*inv[j] % MOD;</span><br><span class="line">                &#125;</span><br><span class="line">            &#125;</span><br><span class="line">        &#125;</span><br><span class="line">        <span class="built_in">cout</span> &lt;&lt; ans%MOD &lt;&lt; <span class="built_in">endl</span>;</span><br><span class="line">    &#125;</span><br><span class="line">    <span class="keyword">return</span> <span class="number">0</span>;</span><br><span class="line">&#125;</span><br></pre></td></tr></table></figure>
       
     </div>
     
@@ -388,7 +372,7 @@
       
         <div class="post-tags">
           
-            <a href="/tags/Mo-s-algorithm/" rel="tag"># Mo's algorithm</a>
+            <a href="/tags/HDOJ/" rel="tag"># HDOJ</a>
           
         </div>
       
@@ -401,8 +385,8 @@
         <div class="post-nav">
           <div class="post-nav-next post-nav-item">
             
-              <a href="/2018/03/29/UVA11987/" rel="next" title="UVA11987">
-                <i class="fa fa-chevron-left"></i> UVA11987
+              <a href="/2018/08/14/Dirichlet-convolution/" rel="next" title="狄利克雷卷积">
+                <i class="fa fa-chevron-left"></i> 狄利克雷卷积
               </a>
             
           </div>
@@ -410,10 +394,6 @@
           <span class="post-nav-divider"></span>
 
           <div class="post-nav-prev post-nav-item">
-            
-              <a href="/2018/07/21/tree_chain_spilt/" rel="prev" title="树链剖分">
-                树链剖分 <i class="fa fa-chevron-right"></i>
-              </a>
             
           </div>
         </div>
@@ -545,7 +525,7 @@
             
 
             
-              <div class="post-toc-content"><ol class="nav"><li class="nav-item nav-level-2"><a class="nav-link" href="#引例"><span class="nav-number">1.</span> <span class="nav-text">引例</span></a></li><li class="nav-item nav-level-2"><a class="nav-link" href="#问题分析"><span class="nav-number">2.</span> <span class="nav-text">问题分析</span></a></li><li class="nav-item nav-level-2"><a class="nav-link" href="#莫队算法"><span class="nav-number">3.</span> <span class="nav-text">莫队算法</span></a><ol class="nav-child"><li class="nav-item nav-level-3"><a class="nav-link" href="#更简单的问题"><span class="nav-number">3.1.</span> <span class="nav-text">更简单的问题</span></a><ol class="nav-child"><li class="nav-item nav-level-4"><a class="nav-link" href="#分析性质"><span class="nav-number">3.1.1.</span> <span class="nav-text">分析性质</span></a></li><li class="nav-item nav-level-4"><a class="nav-link" href="#实现"><span class="nav-number">3.1.2.</span> <span class="nav-text">实现</span></a></li><li class="nav-item nav-level-4"><a class="nav-link" href="#复杂度"><span class="nav-number">3.1.3.</span> <span class="nav-text">复杂度</span></a></li></ol></li><li class="nav-item nav-level-3"><a class="nav-link" href="#更深层次的问题"><span class="nav-number">3.2.</span> <span class="nav-text">更深层次的问题</span></a><ol class="nav-child"><li class="nav-item nav-level-4"><a class="nav-link" href="#裸莫队算法的缺陷"><span class="nav-number">3.2.1.</span> <span class="nav-text">裸莫队算法的缺陷</span></a></li><li class="nav-item nav-level-4"><a class="nav-link" href="#解决方案"><span class="nav-number">3.2.2.</span> <span class="nav-text">解决方案</span></a></li><li class="nav-item nav-level-4"><a class="nav-link" href="#复杂度-1"><span class="nav-number">3.2.3.</span> <span class="nav-text">复杂度</span></a></li></ol></li><li class="nav-item nav-level-3"><a class="nav-link" href="#总结"><span class="nav-number">3.3.</span> <span class="nav-text">总结</span></a></li></ol></li><li class="nav-item nav-level-2"><a class="nav-link" href="#练习"><span class="nav-number">4.</span> <span class="nav-text">练习</span></a></li></ol></div>
+              <div class="post-toc-content"><ol class="nav"><li class="nav-item nav-level-2"><a class="nav-link" href="#题意"><span class="nav-number">1.</span> <span class="nav-text">题意</span></a></li><li class="nav-item nav-level-2"><a class="nav-link" href="#分析"><span class="nav-number">2.</span> <span class="nav-text">分析</span></a></li><li class="nav-item nav-level-2"><a class="nav-link" href="#公式推理"><span class="nav-number">3.</span> <span class="nav-text">公式推理</span></a></li><li class="nav-item nav-level-2"><a class="nav-link" href="#复杂度"><span class="nav-number">4.</span> <span class="nav-text">复杂度</span></a></li><li class="nav-item nav-level-2"><a class="nav-link" href="#代码"><span class="nav-number">5.</span> <span class="nav-text">代码</span></a></li></ol></div>
             
 
           </div>
